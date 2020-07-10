@@ -39,25 +39,25 @@ public class QiniuUploadServiceImpl implements UploadService {
     @Autowired
     private RescourceService rescourceService;
 
-    private UploadInfo getUploadInfo(){
+    private UploadInfo getUploadInfo() {
         return uploadInfoService.getOneInfo();
     }
 
-    private UploadManager getUploadManager(){
+    private UploadManager getUploadManager() {
         Zone z = Zone.zone0();
         Configuration config = new Configuration(z);
         return new UploadManager(config);
     }
 
-    private BucketManager getBucketManager(){
+    private BucketManager getBucketManager() {
         Zone z = Zone.zone0();
         Configuration config = new Configuration(z);
         Auth auth = Auth.create(getUploadInfo().getQiniuAccessKey(), getUploadInfo().getQiniuSecretKey());
-        return new BucketManager(auth,config);
+        return new BucketManager(auth, config);
     }
 
-    private String getAuth(){
-        if(getUploadInfo() == null){
+    private String getAuth() {
+        if (getUploadInfo() == null) {
             throw new MyException("上传信息配置不存在");
         }
         Auth auth = Auth.create(getUploadInfo().getQiniuAccessKey(), getUploadInfo().getQiniuSecretKey());
@@ -78,15 +78,15 @@ public class QiniuUploadServiceImpl implements UploadService {
             String hash = tag.calcETag(file);
             Rescource rescource = new Rescource();
             EntityWrapper<RestResponse> wrapper = new EntityWrapper<>();
-            wrapper.eq("hash",hash);
-            wrapper.eq("source","qiniu");
+            wrapper.eq("hash", hash);
+            wrapper.eq("source", "qiniu");
             rescource = rescource.selectOne(wrapper);
-            if( rescource!= null){
+            if (rescource != null) {
                 return rescource.getWebUrl();
             }
             String qiniuDir = getUploadInfo().getQiniuDir();
 
-            if(StringUtils.isNotBlank(qiniuDir)){
+            if (StringUtils.isNotBlank(qiniuDir)) {
                 key.append(qiniuDir).append("/");
                 returnUrl.append(qiniuDir).append("/");
             }
@@ -97,9 +97,9 @@ public class QiniuUploadServiceImpl implements UploadService {
                 filePath = getUploadInfo().getQiniuBasePath() + fileName;
                 rescource = new Rescource();
                 rescource.setFileName(fileName);
-                rescource.setFileSize(new java.text.DecimalFormat("#.##").format(file.getSize()/1024)+"kb");
+                rescource.setFileSize(new java.text.DecimalFormat("#.##").format(file.getSize() / 1024) + "kb");
                 rescource.setHash(hash);
-                rescource.setFileType(StringUtils.isBlank(extName)?"unknown":extName);
+                rescource.setFileType(StringUtils.isBlank(extName) ? "unknown" : extName);
                 rescource.setWebUrl(returnUrl.toString());
                 rescource.setSource("qiniu");
                 rescourceService.insert(rescource);
@@ -111,9 +111,9 @@ public class QiniuUploadServiceImpl implements UploadService {
     @Override
     public Boolean delete(String path) {
         EntityWrapper<Rescource> wrapper = new EntityWrapper<>();
-        wrapper.eq("web_url",path);
-        wrapper.eq("del_flag",false);
-        wrapper.eq("source","qiniu");
+        wrapper.eq("web_url", path);
+        wrapper.eq("del_flag", false);
+        wrapper.eq("source", "qiniu");
         Rescource rescource = rescourceService.selectOne(wrapper);
         path = rescource.getOriginalNetUrl();
         try {
@@ -130,11 +130,11 @@ public class QiniuUploadServiceImpl implements UploadService {
     public String uploadNetFile(String url) throws IOException, NoSuchAlgorithmException {
         String fileName = RandomUtil.randomUUID();
         EntityWrapper<Rescource> wrapper = new EntityWrapper<>();
-        wrapper.eq("source","qiniu");
-        wrapper.eq("original_net_url",url);
-        wrapper.eq("del_flag",false);
+        wrapper.eq("source", "qiniu");
+        wrapper.eq("original_net_url", url);
+        wrapper.eq("del_flag", false);
         Rescource rescource = rescourceService.selectOne(wrapper);
-        if(rescource != null){
+        if (rescource != null) {
             return rescource.getWebUrl();
         }
         StringBuffer key = new StringBuffer();
@@ -142,16 +142,16 @@ public class QiniuUploadServiceImpl implements UploadService {
         try {
             String qiniuDir = getUploadInfo().getQiniuDir();
 
-            if(StringUtils.isNotBlank(qiniuDir)){
+            if (StringUtils.isNotBlank(qiniuDir)) {
                 key.append(qiniuDir).append("/");
                 returnUrl.append(qiniuDir).append("/");
             }
             key.append(fileName);
             returnUrl.append(fileName);
-            FetchRet fetchRet = getBucketManager().fetch(url, getUploadInfo().getQiniuBucketName(),key.toString());
+            FetchRet fetchRet = getBucketManager().fetch(url, getUploadInfo().getQiniuBucketName(), key.toString());
             rescource = new Rescource();
             rescource.setFileName(fetchRet.key);
-            rescource.setFileSize(new java.text.DecimalFormat("#.##").format(fetchRet.fsize/1024)+"kb");
+            rescource.setFileSize(new java.text.DecimalFormat("#.##").format(fetchRet.fsize / 1024) + "kb");
             rescource.setHash(fetchRet.hash);
             rescource.setFileType(fetchRet.mimeType);
             rescource.setWebUrl(returnUrl.toString());
@@ -167,7 +167,7 @@ public class QiniuUploadServiceImpl implements UploadService {
     @Override
     public String uploadLocalImg(String localPath) {
         File file = new File(localPath);
-        if(!file.exists()){
+        if (!file.exists()) {
             throw new MyException("本地文件不存在");
         }
         QETag tag = new QETag();
@@ -181,13 +181,13 @@ public class QiniuUploadServiceImpl implements UploadService {
         }
         Rescource rescource = new Rescource();
         EntityWrapper<RestResponse> wrapper = new EntityWrapper<>();
-        wrapper.eq("hash",hash);
-        wrapper.eq("source","qiniu");
+        wrapper.eq("hash", hash);
+        wrapper.eq("source", "qiniu");
         rescource = rescource.selectOne(wrapper);
-        if( rescource!= null){
+        if (rescource != null) {
             return rescource.getWebUrl();
         }
-        String filePath="",
+        String filePath = "",
                 extName = "",
                 name = RandomUtil.randomUUID();
         extName = file.getName().substring(
@@ -195,7 +195,7 @@ public class QiniuUploadServiceImpl implements UploadService {
         StringBuffer key = new StringBuffer();
         StringBuffer returnUrl = new StringBuffer(getUploadInfo().getQiniuBasePath());
         String qiniuDir = getUploadInfo().getQiniuDir();
-        if(StringUtils.isNotBlank(qiniuDir)){
+        if (StringUtils.isNotBlank(qiniuDir)) {
             key.append(qiniuDir).append("/");
             returnUrl.append(qiniuDir).append("/");
         }
@@ -203,17 +203,17 @@ public class QiniuUploadServiceImpl implements UploadService {
         returnUrl.append(name).append(extName);
         Response response = null;
         try {
-            response = getUploadManager().put(file,key.toString(),getAuth());
+            response = getUploadManager().put(file, key.toString(), getAuth());
         } catch (QiniuException e) {
             e.printStackTrace();
         }
-        if(response.isOK()){
+        if (response.isOK()) {
             filePath = returnUrl.toString();
             rescource = new Rescource();
-            rescource.setFileName(name+extName);
-            rescource.setFileSize(new java.text.DecimalFormat("#.##").format(file.length()/1024)+"kb");
+            rescource.setFileName(name + extName);
+            rescource.setFileSize(new java.text.DecimalFormat("#.##").format(file.length() / 1024) + "kb");
             rescource.setHash(hash);
-            rescource.setFileType(StringUtils.isBlank(extName)?"unknown":extName);
+            rescource.setFileType(StringUtils.isBlank(extName) ? "unknown" : extName);
             rescource.setWebUrl(filePath);
             rescource.setSource("qiniu");
             rescource.insert();
@@ -226,8 +226,8 @@ public class QiniuUploadServiceImpl implements UploadService {
         StringBuffer key = new StringBuffer();
         StringBuffer returnUrl = new StringBuffer(getUploadInfo().getQiniuBasePath());
         String qiniuDir = getUploadInfo().getQiniuDir();
-        String fileName = RandomUtil.randomUUID(),filePath;
-        if(StringUtils.isNotBlank(qiniuDir)){
+        String fileName = RandomUtil.randomUUID(), filePath;
+        if (StringUtils.isNotBlank(qiniuDir)) {
             key.append(qiniuDir).append("/");
             returnUrl.append(qiniuDir).append("/");
         }
@@ -235,7 +235,7 @@ public class QiniuUploadServiceImpl implements UploadService {
         returnUrl.append(fileName);
         byte[] data = Base64.decodeBase64(base64);
         try {
-            getUploadManager().put(data,key.toString(),getAuth());
+            getUploadManager().put(data, key.toString(), getAuth());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -247,12 +247,12 @@ public class QiniuUploadServiceImpl implements UploadService {
         ClassPathResource classPathResource = new ClassPathResource("static/images/userface1.jpg");
         try {
             Auth auth = Auth.create(uploadInfo.getQiniuAccessKey(), uploadInfo.getQiniuSecretKey());
-            String authstr =  auth.uploadToken(uploadInfo.getQiniuBucketName());
-            InputStream inputStream = classPathResource .getInputStream();
-            Response response = getUploadManager().put(inputStream,"test.jpg",authstr,null,null);
-            if(response.isOK()){
+            String authstr = auth.uploadToken(uploadInfo.getQiniuBucketName());
+            InputStream inputStream = classPathResource.getInputStream();
+            Response response = getUploadManager().put(inputStream, "test.jpg", authstr, null, null);
+            if (response.isOK()) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
         } catch (Exception e) {

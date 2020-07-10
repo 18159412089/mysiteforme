@@ -23,7 +23,7 @@ public class MySysUser {
         return ShiroUser().getloginName();
     }
 
-    public static String nickName(){
+    public static String nickName() {
         return ShiroUser().getNickName();
     }
 

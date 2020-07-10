@@ -9,7 +9,7 @@ import java.util.List;
  * @Description:${TODO}
  * @Date: Create in 17:55 2017/12/25.
  */
-public class TableVO implements Serializable{
+public class TableVO implements Serializable {
     /**
      * 表的名称
      */

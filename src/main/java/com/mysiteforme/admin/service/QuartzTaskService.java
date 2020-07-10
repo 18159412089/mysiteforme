@@ -2,8 +2,8 @@ package com.mysiteforme.admin.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.mysiteforme.admin.entity.QuartzTask;
 import com.baomidou.mybatisplus.service.IService;
+import com.mysiteforme.admin.entity.QuartzTask;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface QuartzTaskService extends IService<QuartzTask> {
     /**
      * 分页查询定时任务列表
      */
-    Page<QuartzTask> queryList(EntityWrapper<QuartzTask> wrapper,Page<QuartzTask> page);
+    Page<QuartzTask> queryList(EntityWrapper<QuartzTask> wrapper, Page<QuartzTask> page);
 
     /**
      * 保存定时任务
@@ -40,12 +40,12 @@ public interface QuartzTaskService extends IService<QuartzTask> {
     /**
      * 批量删除定时任务
      */
-    void deleteBatchTasks(List<Long>  ids);
+    void deleteBatchTasks(List<Long> ids);
 
     /**
      * 批量更新定时任务状态
      */
-    int updateBatchTasksByStatus(List<Long> ids,Integer status);
+    int updateBatchTasksByStatus(List<Long> ids, Integer status);
 
     /**
      * 立即执行

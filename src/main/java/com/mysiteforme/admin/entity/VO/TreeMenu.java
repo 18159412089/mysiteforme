@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class TreeMenu {
     private Long id;
-    private  Long pid;
+    private Long pid;
     private String title;
     private String icon;
     private String href;
@@ -21,7 +21,7 @@ public class TreeMenu {
         this.spread = false;
     }
 
-    public TreeMenu(Long id, Long pid, String title,String icon, String href) {
+    public TreeMenu(Long id, Long pid, String title, String icon, String href) {
         this.id = id;
         this.pid = pid;
         this.title = title;

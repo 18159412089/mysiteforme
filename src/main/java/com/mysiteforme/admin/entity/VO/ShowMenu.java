@@ -9,9 +9,9 @@ import java.util.List;
  * Created by wangl on 2017/11/28.
  * todo:
  */
-public class ShowMenu implements Serializable{
+public class ShowMenu implements Serializable {
     private Long id;
-    private  Long pid;
+    private Long pid;
     private String title;
     private String icon;
     private String href;

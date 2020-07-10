@@ -11,7 +11,7 @@ public class DruidController {
 
     @RequiresPermissions("sys:druid:list")
     @GetMapping("list")
-    public String index(){
+    public String index() {
         return "admin/system/druid/index";
     }
 }

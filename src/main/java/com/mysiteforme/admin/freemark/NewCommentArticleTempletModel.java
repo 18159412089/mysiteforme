@@ -1,6 +1,5 @@
 package com.mysiteforme.admin.freemark;
 
-import com.google.common.collect.Maps;
 import com.mysiteforme.admin.entity.BlogArticle;
 import com.mysiteforme.admin.service.BlogArticleService;
 import freemarker.core.Environment;
@@ -27,9 +26,9 @@ public class NewCommentArticleTempletModel extends BaseDirective implements Temp
             Map.Entry<String, TemplateModel> param = (Map.Entry<String, TemplateModel>) iterator.next();
             String paramName = param.getKey();
             TemplateModel paramValue = param.getValue();
-            if(paramName.toLowerCase().equals("limit")){
-                int templimit = getInt(paramName,paramValue);
-                if(templimit>0){
+            if (paramName.toLowerCase().equals("limit")) {
+                int templimit = getInt(paramName, paramValue);
+                if (templimit > 0) {
                     limit = templimit;
                 }
             }

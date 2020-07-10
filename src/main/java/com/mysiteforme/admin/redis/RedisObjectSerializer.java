@@ -4,6 +4,7 @@ package com.mysiteforme.admin.redis;
  * Created by wangl on 2017/11/25.
  * todo:
  */
+
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.serializer.support.DeserializingConverter;
 import org.springframework.core.serializer.support.SerializingConverter;

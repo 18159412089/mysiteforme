@@ -2,10 +2,10 @@ package com.mysiteforme.admin.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.mysiteforme.admin.entity.QuartzTask;
-import com.mysiteforme.admin.dao.QuartzTaskDao;
-import com.mysiteforme.admin.service.QuartzTaskService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.mysiteforme.admin.dao.QuartzTaskDao;
+import com.mysiteforme.admin.entity.QuartzTask;
+import com.mysiteforme.admin.service.QuartzTaskService;
 import com.mysiteforme.admin.util.Constants;
 import com.mysiteforme.admin.util.quartz.ScheduleUtils;
 import org.quartz.CronTrigger;
@@ -36,16 +36,16 @@ public class QuartzTaskServiceImpl extends ServiceImpl<QuartzTaskDao, QuartzTask
      * 项目启动时，初始化定时器
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         EntityWrapper<QuartzTask> wrapper = new EntityWrapper<>();
-        wrapper.eq("del_flag",false);
+        wrapper.eq("del_flag", false);
         List<QuartzTask> scheduleJobList = selectList(wrapper);
-        for(QuartzTask scheduleJob : scheduleJobList){
+        for (QuartzTask scheduleJob : scheduleJobList) {
             CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, scheduleJob.getId());
             //如果不存在，则创建
-            if(cronTrigger == null) {
+            if (cronTrigger == null) {
                 ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
-            }else {
+            } else {
                 ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
             }
         }
@@ -58,24 +58,24 @@ public class QuartzTaskServiceImpl extends ServiceImpl<QuartzTaskDao, QuartzTask
 
     @Override
     public Page<QuartzTask> queryList(EntityWrapper<QuartzTask> wrapper, Page<QuartzTask> page) {
-        return selectPage(page,wrapper);
+        return selectPage(page, wrapper);
     }
 
     @Override
     public void saveQuartzTask(QuartzTask quartzTask) {
         baseMapper.insert(quartzTask);
-        ScheduleUtils.createScheduleJob(scheduler,quartzTask);
+        ScheduleUtils.createScheduleJob(scheduler, quartzTask);
     }
 
     @Override
     public void updateQuartzTask(QuartzTask quartzTask) {
         baseMapper.updateById(quartzTask);
-        ScheduleUtils.updateScheduleJob(scheduler,quartzTask);
+        ScheduleUtils.updateScheduleJob(scheduler, quartzTask);
     }
 
     @Override
     public void deleteBatchTasks(List<Long> ids) {
-        for(Long id : ids){
+        for (Long id : ids) {
             ScheduleUtils.deleteScheduleJob(scheduler, id);
         }
         deleteBatchIds(ids);
@@ -84,7 +84,7 @@ public class QuartzTaskServiceImpl extends ServiceImpl<QuartzTaskDao, QuartzTask
     @Override
     public int updateBatchTasksByStatus(List<Long> ids, Integer status) {
         List<QuartzTask> list = selectBatchIds(ids);
-        for (QuartzTask task : list){
+        for (QuartzTask task : list) {
             task.setStatus(status);
         }
         updateBatchById(list);
@@ -93,14 +93,14 @@ public class QuartzTaskServiceImpl extends ServiceImpl<QuartzTaskDao, QuartzTask
 
     @Override
     public void run(List<Long> jobIds) {
-        for(Long jobId : jobIds){
+        for (Long jobId : jobIds) {
             ScheduleUtils.run(scheduler, queryObject(jobId));
         }
     }
 
     @Override
     public void paush(List<Long> jobIds) {
-        for(Long jobId : jobIds){
+        for (Long jobId : jobIds) {
             ScheduleUtils.pauseJob(scheduler, jobId);
         }
         updateBatchTasksByStatus(jobIds, Constants.QUARTZ_STATUS_PUSH);
@@ -108,7 +108,7 @@ public class QuartzTaskServiceImpl extends ServiceImpl<QuartzTaskDao, QuartzTask
 
     @Override
     public void resume(List<Long> jobIds) {
-        for(Long jobId : jobIds){
+        for (Long jobId : jobIds) {
             ScheduleUtils.resumeJob(scheduler, jobId);
         }
 

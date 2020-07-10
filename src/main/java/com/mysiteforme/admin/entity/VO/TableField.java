@@ -10,7 +10,7 @@ import java.util.List;
  * @Description:${TODO}
  * @Date: Create in 18:00 2017/12/25.
  */
-public class TableField implements Serializable{
+public class TableField implements Serializable {
     private String name;
     private Integer length;
     private String type;

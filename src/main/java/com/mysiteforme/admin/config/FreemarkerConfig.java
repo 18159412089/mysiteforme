@@ -53,27 +53,27 @@ public class FreemarkerConfig {
     @PostConstruct
     public void setSharedVariable() {
         //系统字典标签
-        configuration.setSharedVariable("my",systemDirective);
+        configuration.setSharedVariable("my", systemDirective);
         //博客文章标签
-        configuration.setSharedVariable("ar",articleDirective);
+        configuration.setSharedVariable("ar", articleDirective);
         //博客首页文章列表标签
-        configuration.setSharedVariable("myindex",indexArticleDirective);
+        configuration.setSharedVariable("myindex", indexArticleDirective);
         //博客栏目标签
-        configuration.setSharedVariable("mychannel",channelDirective);
+        configuration.setSharedVariable("mychannel", channelDirective);
         //博客当前栏目所有父目录集合标签
-        configuration.setSharedVariable("articleChannelList",parentChannelListDirective);
+        configuration.setSharedVariable("articleChannelList", parentChannelListDirective);
 
         //获取文章点击量标签
-        configuration.setSharedVariable("clickNumber",articleClickTempletModel);
+        configuration.setSharedVariable("clickNumber", articleClickTempletModel);
         //获取文章评论数量
-        configuration.setSharedVariable("commentNumber",commentNumberTempletModel);
+        configuration.setSharedVariable("commentNumber", commentNumberTempletModel);
         //获取系统用户信息
-        configuration.setSharedVariable("sysuser",sysUserTempletModel);
+        configuration.setSharedVariable("sysuser", sysUserTempletModel);
         //获取标签集合
-        configuration.setSharedVariable("tags",tagsTempletModel);
+        configuration.setSharedVariable("tags", tagsTempletModel);
         //最新评论文章集合
-        configuration.setSharedVariable("nca",newCommentArticleTempletModel);
+        configuration.setSharedVariable("nca", newCommentArticleTempletModel);
         //当前文章相似的文章
-        configuration.setSharedVariable("same",lookLikeArticlesTempletModel);
+        configuration.setSharedVariable("same", lookLikeArticlesTempletModel);
     }
 }

@@ -3,13 +3,11 @@
  */
 package com.mysiteforme.admin.base;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.FieldStrategy;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mysiteforme.admin.entity.User;
 
 import java.util.Date;
@@ -24,7 +22,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
     private static final long serialVersionUID = 1L;
 
     /**
-     *  创建者
+     * 创建者
      */
     @TableField(value = "create_by", fill = FieldFill.INSERT)
     protected Long createId;
@@ -43,7 +41,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
 
     /**
      * 更新日期
-      */
+     */
     @TableField(value = "update_date", fill = FieldFill.INSERT_UPDATE)
     protected Date updateDate;
 
@@ -56,7 +54,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
     /**
      * 备注
      */
-    @TableField(strategy= FieldStrategy.IGNORED)
+    @TableField(strategy = FieldStrategy.IGNORED)
     protected String remarks;
 
     /**
@@ -70,8 +68,6 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
      */
     @TableField(exist = false)
     protected User updateUser;
-
-
 
 
     public Long getCreateId() {

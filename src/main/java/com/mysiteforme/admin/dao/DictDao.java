@@ -1,12 +1,11 @@
 package com.mysiteforme.admin.dao;
 
-import com.mysiteforme.admin.entity.Dict;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import org.springframework.stereotype.Component;
+import com.mysiteforme.admin.entity.Dict;
 
 /**
  * <p>
-  * 字典表 Mapper 接口
+ * 字典表 Mapper 接口
  * </p>
  *
  * @author wangl

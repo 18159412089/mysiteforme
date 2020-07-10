@@ -37,7 +37,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    private Logger  logger = LoggerFactory.getLogger(ShiroConfig.class);
+    private Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Value("${spring.redis.host}")
     private String jedisHost;
@@ -49,40 +49,40 @@ public class ShiroConfig {
     private String jedisPassword;
 
     @Bean
-    public FilterRegistrationBean delegatingFilterProxy(){
+    public FilterRegistrationBean delegatingFilterProxy() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         DelegatingFilterProxy proxy = new DelegatingFilterProxy();
         proxy.setTargetFilterLifecycle(true);
         proxy.setTargetBeanName("shiroFilter");
         filterRegistrationBean.setFilter(proxy);
-        filterRegistrationBean.setDispatcherTypes(DispatcherType.ERROR,DispatcherType.REQUEST,DispatcherType.FORWARD,DispatcherType.INCLUDE);
+        filterRegistrationBean.setDispatcherTypes(DispatcherType.ERROR, DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE);
         return filterRegistrationBean;
     }
 
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("authRealm")AuthRealm authRealm){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("authRealm") AuthRealm authRealm) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager(authRealm));
         bean.setSuccessUrl("/index");
         bean.setLoginUrl("/login");
-        Map<String,Filter> map = Maps.newHashMap();
-        map.put("authc",new CaptchaFormAuthenticationFilter());
+        Map<String, Filter> map = Maps.newHashMap();
+        map.put("authc", new CaptchaFormAuthenticationFilter());
         bean.setFilters(map);
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap = Maps.newLinkedHashMap();
-        filterChainDefinitionMap.put("/static/**","anon");
-        filterChainDefinitionMap.put("/showBlog/**","anon");
-        filterChainDefinitionMap.put("/blog/**","anon");
-        filterChainDefinitionMap.put("/login/main","anon");
-        filterChainDefinitionMap.put("/genCaptcha","anon");
-        filterChainDefinitionMap.put("/systemLogout","authc");
-        filterChainDefinitionMap.put("/**","authc");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/showBlog/**", "anon");
+        filterChainDefinitionMap.put("/blog/**", "anon");
+        filterChainDefinitionMap.put("/login/main", "anon");
+        filterChainDefinitionMap.put("/genCaptcha", "anon");
+        filterChainDefinitionMap.put("/systemLogout", "authc");
+        filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
 
     @Bean
-    public SecurityManager securityManager(@Qualifier("authRealm")AuthRealm authRealm){
+    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         logger.info("- - - - - - -shiro开始加载- - - - - - ");
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(authRealm);
@@ -93,9 +93,8 @@ public class ShiroConfig {
     }
 
 
-
     @Bean
-    public SimpleCookie rememberMeCookie(){
+    public SimpleCookie rememberMeCookie() {
         //这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
         SimpleCookie cookie = new SimpleCookie("rememberMe");
         cookie.setHttpOnly(true);
@@ -105,7 +104,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public CookieRememberMeManager rememberMeManager(){
+    public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
         rememberMeManager.setCookie(rememberMeCookie());
         rememberMeManager.setCipherKey(Base64.decode("2AvVhdsgUs0FSA3SDFAdag=="));
@@ -114,34 +113,36 @@ public class ShiroConfig {
 
     /**
      * AOP式方法级权限检查
+     *
      * @return
      */
     @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator(){
-        DefaultAdvisorAutoProxyCreator creator=new DefaultAdvisorAutoProxyCreator();
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
         creator.setProxyTargetClass(true);
         return creator;
     }
 
     /**
      * 保证实现了Shiro内部lifecycle函数的bean执行
+     *
      * @return
      */
     @Bean
-    public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+    public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("authRealm")AuthRealm authRealm) {
-        SecurityManager manager= securityManager(authRealm);
-        AuthorizationAttributeSourceAdvisor advisor=new AuthorizationAttributeSourceAdvisor();
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("authRealm") AuthRealm authRealm) {
+        SecurityManager manager = securityManager(authRealm);
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(manager);
         return advisor;
     }
 
     @Bean
-    public SessionManager webSessionManager(){
+    public SessionManager webSessionManager() {
         DefaultWebSessionManager manager = new DefaultWebSessionManager();
         //设置session过期时间为1小时(单位：毫秒)，默认为30分钟
         manager.setGlobalSessionTimeout(60 * 60 * 1000);
@@ -151,7 +152,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public RedisManager redisManager(){
+    public RedisManager redisManager() {
         RedisManager manager = new RedisManager();
         manager.setHost(jedisHost);
         manager.setPort(jedisPort);
@@ -162,7 +163,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public RedisSessionDAO redisSessionDAO(){
+    public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO sessionDAO = new RedisSessionDAO();
         sessionDAO.setKeyPrefix("wl_");
         sessionDAO.setRedisManager(redisManager());
@@ -170,7 +171,7 @@ public class ShiroConfig {
     }
 
     @Bean("myCacheManager")
-    public RedisCacheManager cacheManager(){
+    public RedisCacheManager cacheManager() {
         RedisCacheManager manager = new RedisCacheManager();
         manager.setRedisManager(redisManager());
         return manager;

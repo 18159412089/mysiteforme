@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author wangl
@@ -19,5 +19,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class GroupServiceImpl extends ServiceImpl<GroupDao, Group> implements GroupService {
-	
+
 }

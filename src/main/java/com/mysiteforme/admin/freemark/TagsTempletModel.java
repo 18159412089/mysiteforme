@@ -32,24 +32,24 @@ public class TagsTempletModel extends BaseDirective implements TemplateDirective
             Map.Entry<String, TemplateModel> param = (Map.Entry<String, TemplateModel>) iterator.next();
             String paramName = param.getKey();
             TemplateModel paramValue = param.getValue();
-            if(paramName.toLowerCase().equals("aid")){
-                aid = getLong(paramName,paramValue);
+            if (paramName.toLowerCase().equals("aid")) {
+                aid = getLong(paramName, paramValue);
             }
-            if(paramName.toLowerCase().equals("cid")){
-                cid = getLong(paramName,paramValue);
+            if (paramName.toLowerCase().equals("cid")) {
+                cid = getLong(paramName, paramValue);
             }
         }
-        if(aid != null && cid != null){
+        if (aid != null && cid != null) {
             throw new MyException("文章ID跟栏目ID不能同时存在");
         }
-        List<BlogTags> list  = null;
-        if(aid != null){
+        List<BlogTags> list = null;
+        if (aid != null) {
             list = blogTagsService.getTagsByArticleId(aid);
         }
-        if(cid != null){
+        if (cid != null) {
             list = blogTagsService.getTagsByChannelId(cid);
         }
-        if(cid == null && aid == null){
+        if (cid == null && aid == null) {
             list = blogTagsService.getTagsByChannelId(null);
         }
         DefaultObjectWrapperBuilder builder = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_26);

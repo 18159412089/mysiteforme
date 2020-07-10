@@ -15,8 +15,8 @@ public class MyException extends RuntimeException {
         this.code = 500;
     }
 
-    public MyException(String msg,Throwable cause) {
-        super(msg,cause);
+    public MyException(String msg, Throwable cause) {
+        super(msg, cause);
         this.msg = msg;
     }
 
@@ -25,8 +25,8 @@ public class MyException extends RuntimeException {
         this.code = code;
     }
 
-    public MyException(String msg, int code,Throwable cause) {
-        super(msg,cause);
+    public MyException(String msg, int code, Throwable cause) {
+        super(msg, cause);
         this.msg = msg;
         this.code = code;
     }

@@ -1,7 +1,6 @@
 package com.mysiteforme.admin.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.mysiteforme.admin.base.DataEntity;
 
@@ -23,158 +22,166 @@ public class BlogComment extends DataEntity<BlogComment> {
     /**
      * 评论内容
      */
-	private String content;
+    private String content;
 
-	/**
-	 * 评论类型：1.文章评论，2.系统留言
-	 */
-	private Integer type;
+    /**
+     * 评论类型：1.文章评论，2.系统留言
+     */
+    private Integer type;
     /**
      * ip
      */
-	private String ip;
+    private String ip;
     /**
      * 操作系统
      */
-	private String system;
+    private String system;
     /**
      * 浏览器
      */
-	private String browser;
+    private String browser;
     /**
      * 楼层
      */
-	private Integer floor;
+    private Integer floor;
     /**
      * 栏目ID
      */
-	@TableField("channel_id")
-	private Long channelId;
+    @TableField("channel_id")
+    private Long channelId;
     /**
      * 文章ID
      */
-	@TableField("article_id")
-	private Long articleId;
+    @TableField("article_id")
+    private Long articleId;
     /**
      * 回复评论ID
      */
-	@TableField("reply_id")
-	private Long replyId;
+    @TableField("reply_id")
+    private Long replyId;
     /**
      * 管理员是否回复
      */
-	@TableField("is_admin_reply")
-	private Boolean isAdminReply;
+    @TableField("is_admin_reply")
+    private Boolean isAdminReply;
     /**
      * 管理员回复内容
      */
-	@TableField("reply_content")
-	private String replyContent;
+    @TableField("reply_content")
+    private String replyContent;
 
-	@TableField(exist = false)
-	private List<BlogComment> replayList;
+    @TableField(exist = false)
+    private List<BlogComment> replayList;
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-	public String getIp() {
-		return ip;
-	}
+    public String getIp() {
+        return ip;
+    }
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public String getSystem() {
-		return system;
-	}
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
-	public void setSystem(String system) {
-		this.system = system;
-	}
-	public String getBrowser() {
-		return browser;
-	}
+    public String getSystem() {
+        return system;
+    }
 
-	public void setBrowser(String browser) {
-		this.browser = browser;
-	}
-	public Integer getFloor() {
-		return floor;
-	}
+    public void setSystem(String system) {
+        this.system = system;
+    }
 
-	public void setFloor(Integer floor) {
-		this.floor = floor;
-	}
-	public Long getChannelId() {
-		return channelId;
-	}
+    public String getBrowser() {
+        return browser;
+    }
 
-	public void setChannelId(Long channelId) {
-		this.channelId = channelId;
-	}
-	public Long getArticleId() {
-		return articleId;
-	}
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
 
-	public void setArticleId(Long articleId) {
-		this.articleId = articleId;
-	}
-	public Long getReplyId() {
-		return replyId;
-	}
+    public Integer getFloor() {
+        return floor;
+    }
 
-	public void setReplyId(Long replyId) {
-		this.replyId = replyId;
-	}
-	public Boolean getAdminReply() {
-		return isAdminReply;
-	}
+    public void setFloor(Integer floor) {
+        this.floor = floor;
+    }
 
-	public void setAdminReply(Boolean isAdminReply) {
-		this.isAdminReply = isAdminReply;
-	}
-	public String getReplyContent() {
-		return replyContent;
-	}
+    public Long getChannelId() {
+        return channelId;
+    }
 
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
-	}
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
 
-	public List<BlogComment> getReplayList() {
-		return replayList;
-	}
+    public Long getArticleId() {
+        return articleId;
+    }
 
-	public void setReplayList(List<BlogComment> replayList) {
-		this.replayList = replayList;
-	}
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
 
-	@Override
-	public String toString() {
-		return "BlogComment{" +
-			", content=" + content +
-			", ip=" + ip +
-			", system=" + system +
-			", browser=" + browser +
-			", floor=" + floor +
-			", channelId=" + channelId +
-			", articleId=" + articleId +
-			", replyId=" + replyId +
-			", isAdminReply=" + isAdminReply +
-			", replyContent=" + replyContent +
-			"}";
-	}
+    public Long getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Long replyId) {
+        this.replyId = replyId;
+    }
+
+    public Boolean getAdminReply() {
+        return isAdminReply;
+    }
+
+    public void setAdminReply(Boolean isAdminReply) {
+        this.isAdminReply = isAdminReply;
+    }
+
+    public String getReplyContent() {
+        return replyContent;
+    }
+
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
+    }
+
+    public List<BlogComment> getReplayList() {
+        return replayList;
+    }
+
+    public void setReplayList(List<BlogComment> replayList) {
+        this.replayList = replayList;
+    }
+
+    @Override
+    public String toString() {
+        return "BlogComment{" +
+                ", content=" + content +
+                ", ip=" + ip +
+                ", system=" + system +
+                ", browser=" + browser +
+                ", floor=" + floor +
+                ", channelId=" + channelId +
+                ", articleId=" + articleId +
+                ", replyId=" + replyId +
+                ", isAdminReply=" + isAdminReply +
+                ", replyContent=" + replyContent +
+                "}";
+    }
 }

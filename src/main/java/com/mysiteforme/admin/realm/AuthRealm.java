@@ -8,29 +8,21 @@ import com.mysiteforme.admin.entity.User;
 import com.mysiteforme.admin.service.UserService;
 import com.mysiteforme.admin.util.Constants;
 import com.mysiteforme.admin.util.Encodes;
-import com.mysiteforme.admin.util.ToolUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.InvalidSessionException;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,20 +38,20 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        ShiroUser shiroUser = (ShiroUser)principalCollection.getPrimaryPrincipal();
+        ShiroUser shiroUser = (ShiroUser) principalCollection.getPrimaryPrincipal();
         User user = userService.findUserByLoginName(shiroUser.getloginName());
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<Role> roles = user.getRoleLists();
         Set<String> roleNames = Sets.newHashSet();
         for (Role role : roles) {
-            if(StringUtils.isNotBlank(role.getName())){
+            if (StringUtils.isNotBlank(role.getName())) {
                 roleNames.add(role.getName());
             }
         }
         Set<Menu> menus = user.getMenus();
         Set<String> permissions = Sets.newHashSet();
         for (Menu menu : menus) {
-            if(StringUtils.isNotBlank(menu.getPermission())){
+            if (StringUtils.isNotBlank(menu.getPermission())) {
                 permissions.add(menu.getPermission());
             }
         }
@@ -72,17 +64,17 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
-        String username = (String)token.getPrincipal();
+        String username = (String) token.getPrincipal();
         User user = userService.findUserByLoginName(username);
-        if(user == null) {
+        if (user == null) {
             throw new UnknownAccountException();//没找到帐号
         }
-        if(Boolean.TRUE.equals(user.getLocked())) {
+        if (Boolean.TRUE.equals(user.getLocked())) {
             throw new LockedAccountException(); //帐号锁定
         }
         byte[] salt = Encodes.decodeHex(user.getSalt());
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                new ShiroUser(user.getId(),user.getLoginName(),user.getNickName(), user.getIcon()),
+                new ShiroUser(user.getId(), user.getLoginName(), user.getNickName(), user.getIcon()),
                 user.getPassword(), //密码
                 ByteSource.Util.bytes(salt),
                 getName()  //realm name
@@ -120,26 +112,28 @@ public class AuthRealm extends AuthorizingRealm {
         public String nickName;
         public String icon;
 
-        public ShiroUser(Long id, String loginName, String nickName,String icon) {
+        public ShiroUser(Long id, String loginName, String nickName, String icon) {
             this.id = id;
             this.loginName = loginName;
             this.nickName = nickName;
-            this.icon=icon;
+            this.icon = icon;
         }
 
         public String getloginName() {
             return loginName;
         }
+
         public String getNickName() {
             return nickName;
         }
+
         public String getIcon() {
             return icon;
         }
+
         public Long getId() {
             return id;
         }
-
 
 
         /**
@@ -175,7 +169,9 @@ public class AuthRealm extends AuthorizingRealm {
             ShiroUser other = (ShiroUser) obj;
             if (loginName == null) {
                 return other.loginName == null;
-            } else return loginName.equals(other.loginName);
+            } else {
+                return loginName.equals(other.loginName);
+            }
         }
     }
 }

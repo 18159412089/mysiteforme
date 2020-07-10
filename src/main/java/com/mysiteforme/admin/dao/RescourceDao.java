@@ -1,7 +1,7 @@
 package com.mysiteforme.admin.dao;
 
-import com.mysiteforme.admin.entity.Rescource;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.mysiteforme.admin.entity.Rescource;
 
 /**
  * <p>

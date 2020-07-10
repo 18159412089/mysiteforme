@@ -5,7 +5,7 @@ import com.mysiteforme.admin.entity.Group;
 
 /**
  * <p>
-  *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author wangl

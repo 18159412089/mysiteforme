@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
     /**
      * 覆盖默认实现，用sendRedirect直接跳出框架，以免造成js框架重复加载js出错。
+     *
      * @param token
      * @param subject
      * @param request
@@ -29,8 +30,8 @@ public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
                                      ServletRequest request, ServletResponse response) throws Exception {
         //issueSuccessRedirect(request, response);
         //we handled the success redirect directly, prevent the chain from continuing:
-        HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse)response;
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + this.getSuccessUrl());
 
         return true;

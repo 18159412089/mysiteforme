@@ -4,18 +4,14 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldStrategy;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mysiteforme.admin.base.DataEntity;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author wangl
@@ -29,125 +25,125 @@ public class User extends DataEntity<User> {
     /**
      * 登录名
      */
-	@TableField("login_name")
-	private String loginName;
+    @TableField("login_name")
+    private String loginName;
     /**
      * 昵称
      */
-	@TableField(value = "nick_name",strategy= FieldStrategy.IGNORED)
-	private String nickName;
+    @TableField(value = "nick_name", strategy = FieldStrategy.IGNORED)
+    private String nickName;
     /**
      * 密码
      */
-	private String password;
+    private String password;
     /**
      * shiro加密盐
      */
-	private String salt;
+    private String salt;
     /**
      * 手机号码
      */
-	@TableField(strategy= FieldStrategy.IGNORED)
-	private String tel;
+    @TableField(strategy = FieldStrategy.IGNORED)
+    private String tel;
     /**
      * 邮箱地址
      */
-	@TableField(strategy= FieldStrategy.IGNORED)
-	private String email;
-	
-	/**
-	 * 账户是否锁定
-	 */
-	private Boolean locked;
+    @TableField(strategy = FieldStrategy.IGNORED)
+    private String email;
 
-	@TableField(strategy= FieldStrategy.IGNORED)
-	private String icon;
+    /**
+     * 账户是否锁定
+     */
+    private Boolean locked;
 
-	@TableField(exist=false)
-	private Set<Role> roleLists = Sets.newHashSet();
-	
-	@TableField(exist=false)
-	private Set<Menu> menus = Sets.newHashSet();
+    @TableField(strategy = FieldStrategy.IGNORED)
+    private String icon;
 
-	public String getLoginName() {
-		return loginName;
-	}
+    @TableField(exist = false)
+    private Set<Role> roleLists = Sets.newHashSet();
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
+    @TableField(exist = false)
+    private Set<Menu> menus = Sets.newHashSet();
 
-	public String getNickName() {
-		return nickName;
-	}
+    public String getLoginName() {
+        return loginName;
+    }
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
 
-	@JSONField(serialize=false)
-	public String getPassword() {
-		return password;
-	}
+    public String getNickName() {
+        return nickName;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
-	@JSONField(serialize=false)
-	public String getSalt() {
-		return salt;
-	}
+    @JSONField(serialize = false)
+    public String getPassword() {
+        return password;
+    }
 
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getTel() {
-		return tel;
-	}
+    @JSONField(serialize = false)
+    public String getSalt() {
+        return salt;
+    }
 
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getTel() {
+        return tel;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public Boolean getLocked() {
-		return locked;
-	}
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
-	public void setLocked(Boolean locked) {
-		this.locked = locked;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public Boolean getLocked() {
+        return locked;
+    }
 
-	public Set<Role> getRoleLists() {
-		return roleLists;
-	}
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
 
-	public void setRoleLists(Set<Role> roleLists) {
-		this.roleLists = roleLists;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public Set<Menu> getMenus() {
-		return menus;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	public void setMenus(Set<Menu> menus) {
-		this.menus = menus;
-	}
+    public Set<Role> getRoleLists() {
+        return roleLists;
+    }
+
+    public void setRoleLists(Set<Role> roleLists) {
+        this.roleLists = roleLists;
+    }
+
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
 }

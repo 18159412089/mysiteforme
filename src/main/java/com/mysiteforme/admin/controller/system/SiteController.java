@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author wangl
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/admin/system/site")
-public class SiteController extends BaseController{
+public class SiteController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteController.class);
 
@@ -48,17 +48,17 @@ public class SiteController extends BaseController{
     @RequiresPermissions("sys:site:list")
     @GetMapping("show")
     @SysLog("跳转网站展示页面")
-    public String show(Model model){
+    public String show(Model model) {
         Site site = siteService.getCurrentSite();
-        model.addAttribute("site",site);
+        model.addAttribute("site", site);
         return "admin/system/site/show";
     }
 
     @RequiresPermissions("sys:site:list")
     @GetMapping("oss")
-    public String oss(Model model){
+    public String oss(Model model) {
         UploadInfo uploadInfo = uploadInfoService.getOneInfo();
-        model.addAttribute("info",uploadInfo);
+        model.addAttribute("info", uploadInfo);
         return "admin/system/site/oss";
     }
 
@@ -66,15 +66,15 @@ public class SiteController extends BaseController{
     @PostMapping("editOss")
     @ResponseBody
     @Transactional
-    public RestResponse editOss(UploadInfo uploadInfo,HttpServletRequest httpServletRequest){
-        Site site = (Site)httpServletRequest.getAttribute("site");
-        if(site == null){
+    public RestResponse editOss(UploadInfo uploadInfo, HttpServletRequest httpServletRequest) {
+        Site site = (Site) httpServletRequest.getAttribute("site");
+        if (site == null) {
             return RestResponse.failure("加载信息错误");
         }
-        if(null == uploadInfo.getId() || 0 == uploadInfo.getId()){
+        if (null == uploadInfo.getId() || 0 == uploadInfo.getId()) {
             return RestResponse.failure("ID不能为空");
         }
-        if(!ossService.testAccess(uploadInfo)){
+        if (!ossService.testAccess(uploadInfo)) {
             return RestResponse.failure("阿里云上传测试检测失败");
         }
         UploadInfo oldInfo = uploadInfoService.selectById(uploadInfo.getId());
@@ -87,9 +87,9 @@ public class SiteController extends BaseController{
 
     @RequiresPermissions("sys:site:list")
     @GetMapping("qiniu")
-    public String qiniu(Model model){
+    public String qiniu(Model model) {
         UploadInfo uploadInfo = uploadInfoService.getOneInfo();
-        model.addAttribute("info",uploadInfo);
+        model.addAttribute("info", uploadInfo);
         return "admin/system/site/qiniu";
     }
 
@@ -97,15 +97,15 @@ public class SiteController extends BaseController{
     @PostMapping("editQiniu")
     @ResponseBody
     @Transactional
-    public RestResponse editQiniu(UploadInfo uploadInfo,HttpServletRequest httpServletRequest){
-        Site site = (Site)httpServletRequest.getAttribute("site");
-        if(site == null){
+    public RestResponse editQiniu(UploadInfo uploadInfo, HttpServletRequest httpServletRequest) {
+        Site site = (Site) httpServletRequest.getAttribute("site");
+        if (site == null) {
             return RestResponse.failure("加载信息错误");
         }
-        if(null == uploadInfo.getId() || 0 == uploadInfo.getId()){
+        if (null == uploadInfo.getId() || 0 == uploadInfo.getId()) {
             return RestResponse.failure("ID不能为空");
         }
-        if(!qiniuService.testAccess(uploadInfo)){
+        if (!qiniuService.testAccess(uploadInfo)) {
             return RestResponse.failure("七牛上传测试检测失败");
         }
         UploadInfo oldInfo = uploadInfoService.selectById(uploadInfo.getId());
@@ -120,32 +120,32 @@ public class SiteController extends BaseController{
     @PostMapping("edit")
     @ResponseBody
     @SysLog("保存网站基本数据")
-    public RestResponse edit(Site site,HttpServletRequest httpServletRequest){
-        if(site.getId() == null){
+    public RestResponse edit(Site site, HttpServletRequest httpServletRequest) {
+        if (site.getId() == null) {
             return RestResponse.failure("ID不能为空");
         }
-        if(site.getId() != 1){
+        if (site.getId() != 1) {
             return RestResponse.failure("ID不正确");
         }
-        if(StringUtils.isBlank(site.getName())){
+        if (StringUtils.isBlank(site.getName())) {
             return RestResponse.failure("站点名称不能为空");
         }
-        if(StringUtils.isNotBlank(site.getRemarks())){
+        if (StringUtils.isNotBlank(site.getRemarks())) {
             site.setRemarks(site.getRemarks().replace("\"", "\'"));
         }
-        if("oss".equals(site.getFileUploadType())){
+        if ("oss".equals(site.getFileUploadType())) {
             UploadInfo uploadInfo = uploadInfoService.getOneInfo();
-            if(StringUtils.isBlank(uploadInfo.getOssKeySecret()) ||
-               StringUtils.isBlank(uploadInfo.getOssKeyId()) ||
-               StringUtils.isBlank(uploadInfo.getOssEndpoint())){
+            if (StringUtils.isBlank(uploadInfo.getOssKeySecret()) ||
+                    StringUtils.isBlank(uploadInfo.getOssKeyId()) ||
+                    StringUtils.isBlank(uploadInfo.getOssEndpoint())) {
                 return RestResponse.failure("阿里云存储信息不能为空");
             }
         }
-        if("qiniu".equals(site.getFileUploadType())){
+        if ("qiniu".equals(site.getFileUploadType())) {
             UploadInfo uploadInfo = uploadInfoService.getOneInfo();
-            if(StringUtils.isBlank(uploadInfo.getQiniuAccessKey()) ||
+            if (StringUtils.isBlank(uploadInfo.getQiniuAccessKey()) ||
                     StringUtils.isBlank(uploadInfo.getQiniuSecretKey()) ||
-                    StringUtils.isBlank(uploadInfo.getQiniuBucketName())){
+                    StringUtils.isBlank(uploadInfo.getQiniuBucketName())) {
                 return RestResponse.failure("七牛云存储信息不能为空");
             }
         }

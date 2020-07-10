@@ -1,9 +1,7 @@
 package com.mysiteforme.admin.base;
 
 import com.mysiteforme.admin.entity.Site;
-import com.mysiteforme.admin.entity.User;
 import com.mysiteforme.admin.service.SiteService;
-import com.mysiteforme.admin.service.UserService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +32,8 @@ public class BlogHandlerInterceptor implements HandlerInterceptor {
 
         }
         Site site = siteService.getCurrentSite();
-        if(site != null){
-            httpServletRequest.setAttribute("site",site);
+        if (site != null) {
+            httpServletRequest.setAttribute("site", site);
             return true;
         }
         return false;

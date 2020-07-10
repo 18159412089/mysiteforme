@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author wangl
@@ -32,5 +32,5 @@ public interface RoleService extends IService<Role> {
     Integer getRoleNameCount(String name);
 
     List<Role> selectAll();
-	
+
 }

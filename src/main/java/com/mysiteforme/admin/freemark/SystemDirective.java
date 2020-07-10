@@ -34,17 +34,17 @@ public class SystemDirective extends BaseDirective implements TemplateDirectiveM
             Map.Entry<String, TemplateModel> param = (Map.Entry<String, TemplateModel>) iterator.next();
             String paramName = param.getKey();
             TemplateModel paramValue = param.getValue();
-            if(paramName.toLowerCase().equals("type")){
-                String dicType = getString(paramName,paramValue);
-                if(StringUtils.isBlank(dicType)){
+            if (paramName.toLowerCase().equals("type")) {
+                String dicType = getString(paramName, paramValue);
+                if (StringUtils.isBlank(dicType)) {
                     throw new TemplateModelException("参数名称不正确");
-                }else{
+                } else {
                     dictList = dictService.getDictByType(dicType);
                 }
             }
 
         }
-        if(dictList.size()<=0){
+        if (dictList.size() <= 0) {
             throw new TemplateModelException("返回值为空");
         }
         DefaultObjectWrapperBuilder builder = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_26);

@@ -2,9 +2,7 @@ package com.mysiteforme.admin.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.mysiteforme.admin.entity.Menu;
-import com.mysiteforme.admin.entity.User;
 import com.mysiteforme.admin.entity.VO.ShowMenu;
-import com.mysiteforme.admin.entity.VO.TreeMenu;
 import com.mysiteforme.admin.entity.VO.ZtreeVO;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author wangl
@@ -20,7 +18,7 @@ import java.util.Map;
  */
 public interface MenuService extends IService<Menu> {
 
-    List<Menu> selectAllMenus(Map<String,Object> map);
+    List<Menu> selectAllMenus(Map<String, Object> map);
 
     List<ZtreeVO> showTreeMenus();
 

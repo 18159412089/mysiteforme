@@ -1,11 +1,11 @@
 package com.mysiteforme.admin.service;
 
-import com.mysiteforme.admin.entity.Site;
 import com.baomidou.mybatisplus.service.IService;
+import com.mysiteforme.admin.entity.Site;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author wangl
@@ -16,5 +16,5 @@ public interface SiteService extends IService<Site> {
     Site getCurrentSite();
 
     void updateSite(Site site);
-	
+
 }

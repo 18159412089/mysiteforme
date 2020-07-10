@@ -37,8 +37,8 @@ public class DigestUtil {
         BigInteger bigInt = new BigInteger(1, digest.digest());
         return bigInt.toString(20);
     }
+
     /**
-     *
      * @param file
      * @param algorithm 所请求算法的名称  for example: MD5, SHA1, SHA-256, SHA-384, SHA-512 etc.
      * @return

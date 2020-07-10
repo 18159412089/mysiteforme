@@ -28,22 +28,22 @@ public class LogServiceImpl extends ServiceImpl<LogDao, Log> implements LogServi
 
     @Override
     public List<Integer> selectSelfMonthData() {
-        List<Map> list =  baseMapper.selectSelfMonthData();
+        List<Map> list = baseMapper.selectSelfMonthData();
         //补全数据库中不存在的日期，订单数为0
         List<String> dayList = Lists.newArrayList();
-        for (int i=-14;i<=0;i++){
-            DateTime  dateTime = DateUtil.offsetDay(new Date(),i);
+        for (int i = -14; i <= 0; i++) {
+            DateTime dateTime = DateUtil.offsetDay(new Date(), i);
             dayList.add(dateTime.toString("yyyy-MM-dd"));
         }
         List<Integer> pv = Lists.newArrayList();
-        for (int i=0;i<dayList.size();i++){
+        for (int i = 0; i < dayList.size(); i++) {
             Integer total = 0;
-            for(Map map : list){
-                String date  = (String)map.get("days");
+            for (Map map : list) {
+                String date = (String) map.get("days");
                 total = Integer.valueOf(map.get("total").toString());
-                if(date.equalsIgnoreCase(dayList.get(i))){
+                if (date.equalsIgnoreCase(dayList.get(i))) {
                     break;
-                }else{
+                } else {
                     total = 0;
                 }
             }

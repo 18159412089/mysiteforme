@@ -1,7 +1,7 @@
 package com.mysiteforme.admin.service;
 
-import com.mysiteforme.admin.entity.Dict;
 import com.baomidou.mybatisplus.service.IService;
+import com.mysiteforme.admin.entity.Dict;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface DictService extends IService<Dict> {
 
-    List<Dict>  getDictByType(String type);
+    List<Dict> getDictByType(String type);
 
     Integer getCountByType(String type);
 
     Integer getMaxSortByType(String type);
 
-    Integer getCountByAll(String type,String label,String value);
+    Integer getCountByAll(String type, String label, String value);
 
     void saveOrUpdateDict(Dict dict);
 
@@ -33,5 +33,5 @@ public interface DictService extends IService<Dict> {
 
     void deleteByTableName(String tableName);
 
-    void updateByType(String oldType,String newType);
+    void updateByType(String oldType, String newType);
 }

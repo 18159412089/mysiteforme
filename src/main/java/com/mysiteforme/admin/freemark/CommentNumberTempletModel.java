@@ -15,9 +15,10 @@ public class CommentNumberTempletModel implements TemplateMethodModelEx {
 
     @Autowired
     private BlogCommentService blogCommentService;
+
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if(list == null || list.size() == 0){
+        if (list == null || list.size() == 0) {
             throw new MyException("参数为空");
         }
         SimpleNumber simpleNumber = (SimpleNumber) list.get(0);

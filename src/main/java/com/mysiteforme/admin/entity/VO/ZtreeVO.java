@@ -5,90 +5,89 @@ import java.util.List;
 
 /**
  * Ztree 树
- * @author Administrator
  *
+ * @author Administrator
  */
-public class ZtreeVO implements Serializable{
+public class ZtreeVO implements Serializable {
 
-	private Long id;
+    private Long id;
 
-	private Long pid;
+    private Long pid;
 
-	private String name;
-	
-	private String url;
-	
-	private Boolean open =true;
-	
-	private Boolean isParent;
-	
-	private String icon;
-	
-	private List<ZtreeVO> children;
-	
+    private String name;
+
+    private String url;
+
+    private Boolean open = true;
+
+    private Boolean isParent;
+
+    private String icon;
+
+    private List<ZtreeVO> children;
 
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public Boolean getOpen() {
-		return open;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public void setOpen(Boolean open) {
-		this.open = open;
-	}
-	
-	public Boolean getIsParent() {
-		return isParent;
-	}
+    public Boolean getOpen() {
+        return open;
+    }
 
-	public void setIsParent(Boolean isParent) {
-		this.isParent = isParent;
-	}
+    public void setOpen(Boolean open) {
+        this.open = open;
+    }
 
-	public List<ZtreeVO> getChildren() {
-		return children;
-	}
+    public Boolean getIsParent() {
+        return isParent;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public void setIsParent(Boolean isParent) {
+        this.isParent = isParent;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public List<ZtreeVO> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<ZtreeVO> children) {
-		this.children = children;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setChildren(List<ZtreeVO> children) {
+        this.children = children;
+    }
 
-	public Long getPid() {
-		return pid;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setPid(Long pid) {
-		this.pid = pid;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
 }

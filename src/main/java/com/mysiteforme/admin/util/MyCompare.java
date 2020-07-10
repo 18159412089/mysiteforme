@@ -11,9 +11,9 @@ import java.util.Comparator;
 public class MyCompare implements Comparator<Menu> {
     @Override
     public int compare(Menu a, Menu b) {
-        if(a.getParentIds().contains(b.getParentIds())){
+        if (a.getParentIds().contains(b.getParentIds())) {
             return -1;
-        }else{
+        } else {
             return 1;
         }
     }

@@ -5,7 +5,7 @@ import com.mysiteforme.admin.base.TreeEntity;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author wangl

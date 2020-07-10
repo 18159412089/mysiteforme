@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author wangl
@@ -22,36 +22,36 @@ public class Role extends DataEntity<Role> {
     /**
      * 角色名称
      */
-	private String name;
+    private String name;
 
-	@TableField(exist = false)
-	private Set<Menu> menuSet;
+    @TableField(exist = false)
+    private Set<Menu> menuSet;
 
-	@TableField(exist = false)
-	private Set<User> userSet;
+    @TableField(exist = false)
+    private Set<User> userSet;
 
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Set<Menu> getMenuSet() {
-		return menuSet;
-	}
+    public Set<Menu> getMenuSet() {
+        return menuSet;
+    }
 
-	public void setMenuSet(Set<Menu> menuSet) {
-		this.menuSet = menuSet;
-	}
+    public void setMenuSet(Set<Menu> menuSet) {
+        this.menuSet = menuSet;
+    }
 
-	public Set<User> getUserSet() {
-		return userSet;
-	}
+    public Set<User> getUserSet() {
+        return userSet;
+    }
 
-	public void setUserSet(Set<User> userSet) {
-		this.userSet = userSet;
-	}
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
+    }
 }

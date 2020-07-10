@@ -2,22 +2,15 @@ package com.mysiteforme.admin.util;
 
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.google.common.collect.Lists;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GenEntityMySql {
-	public static void main(String[] args) {
-		AutoGenerator mpg = new AutoGenerator();
+    public static void main(String[] args) {
+        AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -32,23 +25,23 @@ public class GenEntityMySql {
         gc.setAuthor("wangl");
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
-         gc.setMapperName("%sDao");
-         gc.setXmlName("%sDao");
-         gc.setServiceName("%sService");
-         gc.setServiceImplName("%sServiceImpl");
+        gc.setMapperName("%sDao");
+        gc.setXmlName("%sDao");
+        gc.setServiceName("%sService");
+        gc.setServiceImplName("%sServiceImpl");
 //         gc.setControllerName("%s");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setTypeConvert(new MySqlTypeConvert(){
+        dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
-                 if ( fieldType.toLowerCase().contains( "bit" ) ) {
+                if (fieldType.toLowerCase().contains("bit")) {
                     return DbColumnType.BOOLEAN;
-                 }
+                }
                 return super.processTypeConvert(fieldType);
             }
         });
@@ -60,16 +53,16 @@ public class GenEntityMySql {
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-    // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "sys_"});// 此处可以修改为您的表前缀
+        // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
+        strategy.setTablePrefix(new String[]{"sys_"});// 此处可以修改为您的表前缀
 
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "sys_rescource"}); // 需要生成的表
+        strategy.setInclude(new String[]{"sys_rescource"}); // 需要生成的表
 //        strategy.setExclude(new String[]{"sys_user_role","sys_role_menu","sys_group_ur"}); // 排除生成的表
         // 自定义实体父类
         strategy.setSuperEntityClass("com.mysiteforme.admin.base.DataEntity");
         // 自定义实体，公共字段
-        strategy.setSuperEntityColumns(new String[] { "id","create_date","create_by","update_date","update_by","remarks","del_flag" });
+        strategy.setSuperEntityColumns(new String[]{"id", "create_date", "create_by", "update_date", "update_by", "remarks", "del_flag"});
 //        strategy.setSuperEntityColumns(new String[] { "id" });
         // 自定义 mapper 父类
         // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
@@ -94,7 +87,7 @@ public class GenEntityMySql {
         pc.setMapper("dao");
         pc.setController("controller");
         mpg.setPackageInfo(pc);
-        
+
 
 //        // 注入自定义配置，可以在 VM 中使用 cfg.abc 【可无】
 //        InjectionConfig cfg = new InjectionConfig() {
@@ -150,11 +143,11 @@ public class GenEntityMySql {
         // tc.setXml("...");
         // tc.setService("...");
         // tc.setServiceImpl("...");
-    // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
+        // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
         // mpg.setTemplate(tc);
 
         // 执行生成
         mpg.execute();
 
-	}
+    }
 }

@@ -58,21 +58,21 @@ public class TableServiceImpl implements TableService {
     public void creatTable(TableVO tableVO) {
         StringBuilder stringBuilder = new StringBuilder();
         //处理字段备注
-        for(TableField field : tableVO.getFieldList()){
-            if(field.getDofor().equals("timer") || field.getDofor().equals("editor") || field.getDofor().contains("upload") || field.getDofor().equals("switch")){
+        for (TableField field : tableVO.getFieldList()) {
+            if (field.getDofor().equals("timer") || field.getDofor().equals("editor") || field.getDofor().contains("upload") || field.getDofor().equals("switch")) {
                 String fieldName = null;
-                stringBuilder.append(field.getDofor()+"-"+ getFieldName(field.getName(),field.getType())+"-"+field.getIsNullValue());
-                if(field.getDofor().equals("switch")){
+                stringBuilder.append(field.getDofor() + "-" + getFieldName(field.getName(), field.getType()) + "-" + field.getIsNullValue());
+                if (field.getDofor().equals("switch")) {
                     stringBuilder.append("-").append(field.getDefaultValue()).append("-").append(field.getName()).append(",");
-                }else{
+                } else {
                     stringBuilder.append(",");
                 }
             }
 
-            if(field.getDofor().equals("select") || field.getDofor().equals("radio") || field.getDofor().equals("checkbox") || field.getDofor().equals("switch")){
+            if (field.getDofor().equals("select") || field.getDofor().equals("radio") || field.getDofor().equals("checkbox") || field.getDofor().equals("switch")) {
                 StringBuilder desc = new StringBuilder();
                 desc.append(tableVO.getComment()).append("-").append(field.getComment());
-                if(field.getDictlist() != null && field.getDictlist().size()>0) {
+                if (field.getDictlist() != null && field.getDictlist().size() > 0) {
                     int i = 0;
                     for (Dict dict : field.getDictlist()) {
                         StringBuilder my = new StringBuilder();
@@ -81,9 +81,9 @@ public class TableServiceImpl implements TableService {
                         dict.setSort(i);
                         i = i + 1;
                     }
-                    dictService.saveDictList(tableVO.getName()+"_"+field.getName(),field.getDictlist());
+                    dictService.saveDictList(tableVO.getName() + "_" + field.getName(), field.getDictlist());
                 }
-            }else{
+            } else {
                 field.setDefaultValue(false);
             }
             //处理comment
@@ -91,18 +91,19 @@ public class TableServiceImpl implements TableService {
 
         }
         //处理表的备注
-        tableVO.setComment(tableVO.getComment()+","+tableVO.getTabletype()+(stringBuilder.length()>0?","+stringBuilder.substring(0,stringBuilder.length()-1):""));
+        tableVO.setComment(tableVO.getComment() + "," + tableVO.getTabletype() + (stringBuilder.length() > 0 ? "," + stringBuilder.substring(0, stringBuilder.length() - 1) : ""));
         String json = JSONObject.toJSONString(tableVO);
-        Map<String,Object> map = JSON.parseObject(json,new TypeReference<HashMap<String,Object>>() {});
+        Map<String, Object> map = JSON.parseObject(json, new TypeReference<HashMap<String, Object>>() {
+        });
         tableDao.creatTable(map);
     }
 
-    private String getFieldName(String name,String type){
-        if(type.equalsIgnoreCase("bit") && name.indexOf("is_") == 0){
-            name = name.replaceFirst("is_","");
-            return Underline2Camel.underline2Camel(name,true);
-        }else{
-            return Underline2Camel.underline2Camel(name,true);
+    private String getFieldName(String name, String type) {
+        if (type.equalsIgnoreCase("bit") && name.indexOf("is_") == 0) {
+            name = name.replaceFirst("is_", "");
+            return Underline2Camel.underline2Camel(name, true);
+        } else {
+            return Underline2Camel.underline2Camel(name, true);
         }
     }
 
@@ -110,18 +111,18 @@ public class TableServiceImpl implements TableService {
      * 添加字段comment的值
      * @param field
      */
-    private void addFiledCommentValue(TableField field){
-        StringBuilder sv =  new StringBuilder();
+    private void addFiledCommentValue(TableField field) {
+        StringBuilder sv = new StringBuilder();
         sv.append(field.getComment()).append(",").append(field.getDofor()).append(",").append(field.getIsNullValue()).append(",")
                 .append(field.getDefaultValue()).append(",").append(field.getListIsShow()).append(",").append(field.getListIsSearch());
         field.setComment(sv.toString());
     }
 
-    private void addColumnToDict(TableField field){
-        if(field.getDofor().equals("select") || field.getDofor().equals("radio") || field.getDofor().equals("checkbox") || field.getDofor().equals("switch")){
+    private void addColumnToDict(TableField field) {
+        if (field.getDofor().equals("select") || field.getDofor().equals("radio") || field.getDofor().equals("checkbox") || field.getDofor().equals("switch")) {
             StringBuilder desc = new StringBuilder();
             desc.append(field.getTableComment()).append("-").append(field.getComment());
-            if(field.getDictlist() != null && field.getDictlist().size()>0) {
+            if (field.getDictlist() != null && field.getDictlist().size() > 0) {
                 int i = 0;
                 for (Dict dict : field.getDictlist()) {
                     StringBuilder my = new StringBuilder();
@@ -130,9 +131,9 @@ public class TableServiceImpl implements TableService {
                     dict.setSort(i);
                     i = i + 1;
                 }
-                dictService.saveDictList(field.getTableName()+"_"+field.getName(),field.getDictlist());
+                dictService.saveDictList(field.getTableName() + "_" + field.getName(), field.getDictlist());
             }
-        }else{
+        } else {
             field.setDefaultValue(false);
         }
 
@@ -144,18 +145,19 @@ public class TableServiceImpl implements TableService {
         addColumnToDict(tableField);
         addFiledCommentValue(tableField);
         String json = JSONObject.toJSONString(tableField);
-        Map<String,Object> map = JSON.parseObject(json,new TypeReference<HashMap<String,Object>>() {});
+        Map<String, Object> map = JSON.parseObject(json, new TypeReference<HashMap<String, Object>>() {
+        });
         tableDao.addColumn(map);
-        changeTableComment(tableField.getTableName(),tableField.getTableComment(),tableField.getTableType());
+        changeTableComment(tableField.getTableName(), tableField.getTableComment(), tableField.getTableType());
     }
 
     @Override
     public void updateColumn(TableField tableField) {
-        dictService.deleteByType(tableField.getTableName()+"_"+tableField.getOldName());
-        if(tableField.getDofor().equals("select") || tableField.getDofor().equals("radio") || tableField.getDofor().equals("checkbox") || tableField.getDofor().equals("switch")){
+        dictService.deleteByType(tableField.getTableName() + "_" + tableField.getOldName());
+        if (tableField.getDofor().equals("select") || tableField.getDofor().equals("radio") || tableField.getDofor().equals("checkbox") || tableField.getDofor().equals("switch")) {
             StringBuilder desc = new StringBuilder();
             desc.append(tableField.getTableComment()).append("-").append(tableField.getComment());
-            if(tableField.getDictlist() != null && tableField.getDictlist().size()>0) {
+            if (tableField.getDictlist() != null && tableField.getDictlist().size() > 0) {
                 for (Dict dict : tableField.getDictlist()) {
                     StringBuilder my = new StringBuilder();
                     my.append(desc).append("(此数据为系统自动创建:数据表【" + tableField.getTableName() + "】中的字段【" + tableField.getName() + "】对应的值)");
@@ -163,27 +165,28 @@ public class TableServiceImpl implements TableService {
                     dictService.saveOrUpdateDict(dict);
                 }
             }
-        }else{
+        } else {
             tableField.setDefaultValue(false);
         }
         addFiledCommentValue(tableField);
         String json = JSONObject.toJSONString(tableField);
-        Map<String,Object> map = JSON.parseObject(json,new TypeReference<HashMap<String,Object>>() {});
-        if(tableField.getOldName().equals(tableField.getName())){
+        Map<String, Object> map = JSON.parseObject(json, new TypeReference<HashMap<String, Object>>() {
+        });
+        if (tableField.getOldName().equals(tableField.getName())) {
             tableDao.updateColumnSameName(map);
-        }else{
+        } else {
             tableDao.updateColumnDiffName(map);
         }
-        changeTableComment(tableField.getTableName(),tableField.getTableComment(),tableField.getTableType());
+        changeTableComment(tableField.getTableName(), tableField.getTableComment(), tableField.getTableType());
     }
 
     @Override
-    public void dropTableField(String fieldName,String tableName) {
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("fieldName",fieldName);
-        map.put("tableName",tableName);
+    public void dropTableField(String fieldName, String tableName) {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("fieldName", fieldName);
+        map.put("tableName", tableName);
         tableDao.dropTableField(map);
-        dictService.deleteByType(tableName+"_"+fieldName);
+        dictService.deleteByType(tableName + "_" + fieldName);
     }
 
 
@@ -194,37 +197,37 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public Page<TableVO> selectTablePage(Page<TableVO> objectPage, Map<String,Object> map) {
-        List<TableVO> list = tableDao.listPage(map,objectPage);
+    public Page<TableVO> selectTablePage(Page<TableVO> objectPage, Map<String, Object> map) {
+        List<TableVO> list = tableDao.listPage(map, objectPage);
         objectPage.setRecords(list);
         return objectPage;
     }
 
     @Override
-    public List<TableField> selectFields(Map<String,Object> map) {
+    public List<TableField> selectFields(Map<String, Object> map) {
         return tableDao.selectFields(map);
     }
 
     @Override
-    public Page<TableField> selectTableFieldPage(Page<TableField> objectPage,Map<String,Object> map) {
-        List<TableField> list = tableDao.selectFields(objectPage,map);
-        for (TableField t : list){
+    public Page<TableField> selectTableFieldPage(Page<TableField> objectPage, Map<String, Object> map) {
+        List<TableField> list = tableDao.selectFields(objectPage, map);
+        for (TableField t : list) {
             changeTableField(t);
         }
         objectPage.setRecords(list);
         return objectPage;
     }
 
-    private void changeTableField(TableField t){
+    private void changeTableField(TableField t) {
         String[] c = t.getComment().split(",");
         t.setComment(c[0]);
-        if(c.length>1) {
+        if (c.length > 1) {
             t.setDofor(c[1]);
         }
-        if(c.length>2){
+        if (c.length > 2) {
             t.setIsNullValue(c[2]);
         }
-        if(c.length>3){
+        if (c.length > 3) {
             t.setDefaultValue(Boolean.valueOf(c[3]));
         }
     }
@@ -235,17 +238,17 @@ public class TableServiceImpl implements TableService {
     }
 
     @Override
-    public void changeTableName(String name,String oldname,String comment,Integer tableType) {
-        Map<String,Object> tablemap = Maps.newHashMap();
-        tablemap.put("name",oldname);
-        tablemap.put("tableType",tableType);
+    public void changeTableName(String name, String oldname, String comment, Integer tableType) {
+        Map<String, Object> tablemap = Maps.newHashMap();
+        tablemap.put("name", oldname);
+        tablemap.put("tableType", tableType);
         List<TableField> tableFields = selectFields(tablemap);
-        for (TableField field:tableFields){
+        for (TableField field : tableFields) {
             String fieldCommon = field.getComment();
             String[] c = fieldCommon.split(",");
-            if(c.length>1){
-                if(c[1].equals("select") || c[1].equals("radio") || c[1].equals("checkbox") || c[1].equals("switch")){
-                    if(field.getDictlist() != null && field.getDictlist().size()>0) {
+            if (c.length > 1) {
+                if (c[1].equals("select") || c[1].equals("radio") || c[1].equals("checkbox") || c[1].equals("switch")) {
+                    if (field.getDictlist() != null && field.getDictlist().size() > 0) {
                         int i = 0;
                         for (Dict dict : field.getDictlist()) {
                             StringBuilder my = new StringBuilder();
@@ -260,38 +263,38 @@ public class TableServiceImpl implements TableService {
             }
         }
 
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("name",name);
-        map.put("oldname",oldname);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("name", name);
+        map.put("oldname", oldname);
         tableDao.changeTableName(map);
     }
 
     @Override
-    public void changeTableComment(String name,String comment,Integer tableType) {
-        Map<String,Object> tablemap = Maps.newHashMap();
-        tablemap.put("name",name);
-        tablemap.put("tableType",tableType);
+    public void changeTableComment(String name, String comment, Integer tableType) {
+        Map<String, Object> tablemap = Maps.newHashMap();
+        tablemap.put("name", name);
+        tablemap.put("tableType", tableType);
         List<TableField> list = selectFields(tablemap);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(comment).append(",").append(tableType).append(",");
         //处理字段备注
-        for(TableField field : list){
+        for (TableField field : list) {
             String[] c = field.getComment().split(",");
-            if(c.length>1) {
+            if (c.length > 1) {
                 if (c[1].equals("timer") || c[1].equals("editor") || c[1].contains("upload") || c[1].equals("switch")) {
-                    stringBuilder.append(c[1] + "-" + getFieldName(field.getName(),field.getType()) +"-"+field.getIsNullValue());
-                    if(c[1].equals("switch")){
+                    stringBuilder.append(c[1] + "-" + getFieldName(field.getName(), field.getType()) + "-" + field.getIsNullValue());
+                    if (c[1].equals("switch")) {
                         stringBuilder.append("-").append(c[3]).append("-").append(field.getName()).append(",");
-                    }else{
+                    } else {
                         stringBuilder.append(",");
                     }
                 }
             }
         }
-        String str = stringBuilder.substring(0,stringBuilder.length()-1);
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("tableName",name);
-        map.put("comment",str);
+        String str = stringBuilder.substring(0, stringBuilder.length() - 1);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("tableName", name);
+        map.put("comment", str);
         tableDao.changeTableComment(map);
     }
 }

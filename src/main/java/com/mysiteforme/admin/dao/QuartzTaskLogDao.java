@@ -1,7 +1,7 @@
 package com.mysiteforme.admin.dao;
 
-import com.mysiteforme.admin.entity.QuartzTaskLog;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.mysiteforme.admin.entity.QuartzTaskLog;
 
 /**
  * <p>

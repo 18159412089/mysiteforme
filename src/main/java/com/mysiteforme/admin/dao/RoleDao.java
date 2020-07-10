@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * <p>
-  *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author wangl
@@ -21,7 +21,7 @@ public interface RoleDao extends BaseMapper<Role> {
 
     void saveRoleMenus(@Param("roleId") Long id, @Param("menus") Set<Menu> menus);
 
-    void dropRoleMenus(@Param("roleId")Long roleId);
+    void dropRoleMenus(@Param("roleId") Long roleId);
 
-    void dropRoleUsers(@Param("roleId")Long roleId);
+    void dropRoleUsers(@Param("roleId") Long roleId);
 }

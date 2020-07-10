@@ -10,11 +10,9 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.google.common.collect.Lists;
-import com.xiaoleilu.hutool.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +28,11 @@ public class CreateTableFiles {
     @Value("${spring.datasource.url}")
     private String dataBaseUrl;
     @Value("${source-code-dic}")
-    public  String baseDic;
+    public String baseDic;
     @Value("${source-code-zipfile}")
-    public  String zipFile;
+    public String zipFile;
 
-    public void createFile(String[] tableNames,Integer type) {
+    public void createFile(String[] tableNames, Integer type) {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -59,7 +57,7 @@ public class CreateTableFiles {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
-        dsc.setTypeConvert(new MySqlTypeConvert(){
+        dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
             @Override
             public DbColumnType processTypeConvert(String fieldType) {
@@ -81,15 +79,15 @@ public class CreateTableFiles {
         strategy.setInclude(tableNames); // 需要生成的表
 //        strategy.setExclude(new String[]{"sys_user_role","sys_role_menu","sys_group_ur"}); // 排除生成的表
         // 自定义实体父类
-        if(type == 1){
+        if (type == 1) {
             strategy.setSuperEntityClass("com.mysiteforme.admin.base.DataEntity");
             // 自定义实体，公共字段
-            strategy.setSuperEntityColumns(new String[] { "id","create_date","create_by","update_date","update_by","remarks","del_flag" });
+            strategy.setSuperEntityColumns(new String[]{"id", "create_date", "create_by", "update_date", "update_by", "remarks", "del_flag"});
         }
-        if(type == 2){
+        if (type == 2) {
             strategy.setSuperEntityClass("com.mysiteforme.admin.base.TreeEntity");
             // 自定义实体，公共字段
-            strategy.setSuperEntityColumns(new String[] { "id","parent_id","level","parent_ids","sort","create_date","create_by","update_date","update_by","remarks","del_flag" });
+            strategy.setSuperEntityColumns(new String[]{"id", "parent_id", "level", "parent_ids", "sort", "create_date", "create_by", "update_date", "update_by", "remarks", "del_flag"});
         }
 //        strategy.setSuperEntityColumns(new String[] { "id" });
         // 自定义 mapper 父类
@@ -132,21 +130,21 @@ public class CreateTableFiles {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return baseDic+ "/"  + tableInfo.getEntityPath() + "/list.ftl";
+                return baseDic + "/" + tableInfo.getEntityPath() + "/list.ftl";
             }
         });
         focList.add(new FileOutConfig("/templates/vm/add.jsp.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return baseDic+ "/" + tableInfo.getEntityPath() + "/add.ftl";
+                return baseDic + "/" + tableInfo.getEntityPath() + "/add.ftl";
             }
         });
         focList.add(new FileOutConfig("/templates/vm/edit.jsp.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return baseDic+ "/"  + tableInfo.getEntityPath() + "/edit.ftl";
+                return baseDic + "/" + tableInfo.getEntityPath() + "/edit.ftl";
             }
         });
         cfg.setFileOutConfigList(focList);

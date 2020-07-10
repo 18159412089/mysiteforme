@@ -30,7 +30,7 @@ public class QETag {
         return encodedString;
     }
 
-    private String calcETag(InputStream inputStream,long fileLength) throws IOException,
+    private String calcETag(InputStream inputStream, long fileLength) throws IOException,
             NoSuchAlgorithmException {
         String etag = "";
         if (fileLength <= CHUNK_SIZE) {
@@ -78,7 +78,7 @@ public class QETag {
         String etag = "";
         long fileLength = file.getSize();
         InputStream inputStream = file.getInputStream();
-        etag = calcETag(inputStream,fileLength);
+        etag = calcETag(inputStream, fileLength);
         return etag;
     }
 
@@ -87,12 +87,12 @@ public class QETag {
         String tag = "";
         long fileLength = file.length();
         FileInputStream inputStream = new FileInputStream(file);
-        tag = calcETag(inputStream,fileLength);
+        tag = calcETag(inputStream, fileLength);
         return tag;
     }
 
     public String calcETag(String fileName) throws IOException,
-            NoSuchAlgorithmException{
+            NoSuchAlgorithmException {
         String etag = "";
         File file = new File(fileName);
         if (!(file.exists() && file.isFile() && file.canRead())) {
@@ -101,7 +101,7 @@ public class QETag {
         }
         long fileLength = file.length();
         FileInputStream inputStream = new FileInputStream(file);
-        etag = calcETag(inputStream,fileLength);
+        etag = calcETag(inputStream, fileLength);
         return etag;
     }
 }

@@ -1,6 +1,5 @@
 package com.mysiteforme.admin.freemark;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mysiteforme.admin.entity.BlogChannel;
 import com.mysiteforme.admin.service.BlogChannelService;
 import freemarker.core.Environment;
@@ -22,6 +21,7 @@ public class ParentChannelListDirective extends BaseDirective implements Templat
 
     @Autowired
     private BlogChannelService blogChannelService;
+
     @Override
     public void execute(Environment environment, Map map, TemplateModel[] templateModels, TemplateDirectiveBody templateDirectiveBody) throws TemplateException, IOException {
         Iterator iterator = map.entrySet().iterator();
@@ -30,14 +30,14 @@ public class ParentChannelListDirective extends BaseDirective implements Templat
             Map.Entry<String, TemplateModel> param = (Map.Entry<String, TemplateModel>) iterator.next();
             String paramName = param.getKey();
             TemplateModel paramValue = param.getValue();
-            if(paramName.toLowerCase().equals("cid")){
-                cid = getLong(paramName,paramValue);
+            if (paramName.toLowerCase().equals("cid")) {
+                cid = getLong(paramName, paramValue);
             }
         }
-        if(cid == null){
+        if (cid == null) {
             throw new TemplateModelException("文章所属栏目ID不能为空");
         }
-        List<BlogChannel> list  = blogChannelService.getParentsChannel(cid);
+        List<BlogChannel> list = blogChannelService.getParentsChannel(cid);
         DefaultObjectWrapperBuilder builder = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_26);
         environment.setVariable("result", builder.build().wrap(list));
         templateDirectiveBody.render(environment.getOut());

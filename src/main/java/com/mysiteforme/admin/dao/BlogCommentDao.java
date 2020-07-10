@@ -1,8 +1,8 @@
 package com.mysiteforme.admin.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.mysiteforme.admin.entity.BlogComment;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,7 @@ public interface BlogCommentDao extends BaseMapper<BlogComment> {
 
     /**
      * 查询文章评论 手动分页
+     *
      * @param map
      * @return
      */
@@ -26,7 +27,7 @@ public interface BlogCommentDao extends BaseMapper<BlogComment> {
 
     Integer selectArticleCommentsCount(Map<String, Object> map);
 
-    List<BlogComment> selectArticleCommentsByPlus(Map<String, Object> map,Page page);
+    List<BlogComment> selectArticleCommentsByPlus(Map<String, Object> map, Page page);
 
     List<BlogComment> getCommentByReplyId(Long replyId);
 

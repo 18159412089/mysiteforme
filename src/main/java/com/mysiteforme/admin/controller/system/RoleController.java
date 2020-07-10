@@ -31,49 +31,49 @@ import java.util.Set;
  */
 @Controller
 @RequestMapping("admin/system/role")
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleController.class);
 
     @GetMapping("list")
     @SysLog("跳转角色列表页面")
-    public String list(){
+    public String list() {
         return "admin/system/role/list";
     }
 
     @RequiresPermissions("sys:role:list")
     @PostMapping("list")
     @ResponseBody
-    public LayerData<Role> list(@RequestParam(value = "page",defaultValue = "1")Integer page,
-                                @RequestParam(value = "limit",defaultValue = "10")Integer limit,
-                                ServletRequest request){
+    public LayerData<Role> list(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                ServletRequest request) {
         Map map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<Role> roleLayerData = new LayerData<>();
         EntityWrapper<Role> roleEntityWrapper = new EntityWrapper<>();
-        roleEntityWrapper.eq("del_flag",false);
-        if(!map.isEmpty()){
+        roleEntityWrapper.eq("del_flag", false);
+        if (!map.isEmpty()) {
             String keys = (String) map.get("key");
-            if(StringUtils.isNotBlank(keys)) {
+            if (StringUtils.isNotBlank(keys)) {
                 roleEntityWrapper.like("name", keys);
             }
         }
-        Page<Role> rolePage = roleService.selectPage(new Page<>(page,limit),roleEntityWrapper);
+        Page<Role> rolePage = roleService.selectPage(new Page<>(page, limit), roleEntityWrapper);
         roleLayerData.setCount(rolePage.getTotal());
         roleLayerData.setData(setUserToRole(rolePage.getRecords()));
         return roleLayerData;
     }
 
-    private List<Role> setUserToRole(List<Role> roles){
-        for(Role r : roles){
-            if(r.getCreateId() != null && r.getCreateId() != 0){
+    private List<Role> setUserToRole(List<Role> roles) {
+        for (Role r : roles) {
+            if (r.getCreateId() != null && r.getCreateId() != 0) {
                 User u = userService.findUserById(r.getCreateId());
-                if(StringUtils.isBlank(u.getNickName())){
+                if (StringUtils.isBlank(u.getNickName())) {
                     u.setNickName(u.getLoginName());
                 }
                 r.setCreateUser(u);
             }
-            if(r.getUpdateId() != null && r.getUpdateId() != 0){
-                User u  = userService.findUserById(r.getUpdateId());
-                if(StringUtils.isBlank(u.getNickName())){
+            if (r.getUpdateId() != null && r.getUpdateId() != 0) {
+                User u = userService.findUserById(r.getUpdateId());
+                if (StringUtils.isBlank(u.getNickName())) {
                     u.setNickName(u.getLoginName());
                 }
                 r.setUpdateUser(u);
@@ -83,12 +83,12 @@ public class RoleController extends BaseController{
     }
 
     @GetMapping("add")
-    public String add(Model model){
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("parentId",null);
-        map.put("isShow",false);
+    public String add(Model model) {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("parentId", null);
+        map.put("isShow", false);
         List<Menu> menuList = menuService.selectAllMenus(map);
-        model.addAttribute("menuList",menuList);
+        model.addAttribute("menuList", menuList);
         return "admin/system/role/add";
     }
 
@@ -96,11 +96,11 @@ public class RoleController extends BaseController{
     @PostMapping("add")
     @ResponseBody
     @SysLog("保存新增角色数据")
-    public RestResponse add(@RequestBody Role role){
-        if(StringUtils.isBlank(role.getName())){
+    public RestResponse add(@RequestBody Role role) {
+        if (StringUtils.isBlank(role.getName())) {
             return RestResponse.failure("角色名称不能为空");
         }
-        if(roleService.getRoleNameCount(role.getName())>0){
+        if (roleService.getRoleNameCount(role.getName()) > 0) {
             return RestResponse.failure("角色名称已存在");
         }
         roleService.saveRole(role);
@@ -108,11 +108,11 @@ public class RoleController extends BaseController{
     }
 
     @GetMapping("edit")
-    public String edit(Long id,Model model){
+    public String edit(Long id, Model model) {
         Role role = roleService.getRoleById(id);
         //StringBuilder menuIds = new StringBuilder();
         List<Long> menuIds = Lists.newArrayList();
-        if(role != null) {
+        if (role != null) {
             Set<Menu> menuSet = role.getMenuSet();
             if (menuSet != null && menuSet.size() > 0) {
                 for (Menu m : menuSet) {
@@ -121,13 +121,13 @@ public class RoleController extends BaseController{
                 }
             }
         }
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("parentId",null);
-        map.put("isShow",false);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("parentId", null);
+        map.put("isShow", false);
         List<Menu> menuList = menuService.selectAllMenus(map);
-        model.addAttribute("role",role);
-        model.addAttribute("menuList",menuList);
-        model.addAttribute("menuIds",menuIds);
+        model.addAttribute("role", role);
+        model.addAttribute("menuList", menuList);
+        model.addAttribute("menuIds", menuIds);
         return "admin/system/role/edit";
     }
 
@@ -135,16 +135,16 @@ public class RoleController extends BaseController{
     @PostMapping("edit")
     @ResponseBody
     @SysLog("保存编辑角色数据")
-    public RestResponse edit(@RequestBody Role role){
-        if(role.getId() == null || role.getId() == 0){
+    public RestResponse edit(@RequestBody Role role) {
+        if (role.getId() == null || role.getId() == 0) {
             return RestResponse.failure("角色ID不能为空");
         }
-        if(StringUtils.isBlank(role.getName())){
+        if (StringUtils.isBlank(role.getName())) {
             return RestResponse.failure("角色名称不能为空");
         }
         Role oldRole = roleService.getRoleById(role.getId());
-        if(!oldRole.getName().equals(role.getName())){
-            if(roleService.getRoleNameCount(role.getName())>0){
+        if (!oldRole.getName().equals(role.getName())) {
+            if (roleService.getRoleNameCount(role.getName()) > 0) {
                 return RestResponse.failure("角色名称已存在");
             }
         }
@@ -156,8 +156,8 @@ public class RoleController extends BaseController{
     @PostMapping("delete")
     @ResponseBody
     @SysLog("删除角色数据")
-    public RestResponse delete(@RequestParam(value = "id",required = false)Long id){
-        if(id == null || id == 0){
+    public RestResponse delete(@RequestParam(value = "id", required = false) Long id) {
+        if (id == null || id == 0) {
             return RestResponse.failure("角色ID不能为空");
         }
         Role role = roleService.getRoleById(id);
@@ -169,11 +169,11 @@ public class RoleController extends BaseController{
     @PostMapping("deleteSome")
     @ResponseBody
     @SysLog("多选删除角色数据")
-    public RestResponse deleteSome(@RequestBody List<Role> roles){
-        if(roles == null || roles.size()==0){
+    public RestResponse deleteSome(@RequestBody List<Role> roles) {
+        if (roles == null || roles.size() == 0) {
             return RestResponse.failure("请选择需要删除的角色");
         }
-        for (Role r : roles){
+        for (Role r : roles) {
             roleService.deleteRole(r);
         }
         return RestResponse.success();

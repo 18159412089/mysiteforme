@@ -4,15 +4,16 @@ package com.mysiteforme.admin.redis;
  * Created by wangl on 2017/11/25.
  * todo:
  */
+
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheException;
+import org.springframework.data.redis.core.RedisTemplate;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.shiro.cache.Cache;
-import org.apache.shiro.cache.CacheException;
-import org.springframework.data.redis.core.RedisTemplate;
 
 @SuppressWarnings("unchecked")
 public class ShiroCache<K, V> implements Cache<K, V> {

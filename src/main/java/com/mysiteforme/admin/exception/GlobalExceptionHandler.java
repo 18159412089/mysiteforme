@@ -34,15 +34,15 @@ public class GlobalExceptionHandler {
      * 500 - Bad Request
      */
     @ExceptionHandler({HttpMessageNotReadableException.class,
-                       HttpRequestMethodNotSupportedException.class,
-                       HttpMediaTypeNotSupportedException.class,
-                       TemplateModelException.class,
-                       SQLException.class})
+            HttpRequestMethodNotSupportedException.class,
+            HttpMediaTypeNotSupportedException.class,
+            TemplateModelException.class,
+            SQLException.class})
     public ModelAndView handleHttpMessageNotReadableException(HttpServletRequest request,
                                                               HttpServletResponse response,
-                                                              Exception e){
+                                                              Exception e) {
         RestResponse restResponse = RestResponse.failure(e.getMessage());
-        return new ModelAndView("admin/error/500",restResponse);
+        return new ModelAndView("admin/error/500", restResponse);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
@@ -60,9 +60,9 @@ public class GlobalExceptionHandler {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }else {
+        } else {
             RestResponse restResponse = RestResponse.failure(unauthorizedException.getMessage());
-            return new ModelAndView("admin/error/500",restResponse);
+            return new ModelAndView("admin/error/500", restResponse);
         }
 
         return null;
@@ -70,6 +70,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 404的拦截.
+     *
      * @param request
      * @param response
      * @param ex
@@ -78,20 +79,20 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
-    public String notFound(HttpServletRequest request, HttpServletResponse response, Exception ex,Model model) {
-        model.addAttribute("url",request.getRequestURI());
+    public String notFound(HttpServletRequest request, HttpServletResponse response, Exception ex, Model model) {
+        model.addAttribute("url", request.getRequestURI());
         return "admin/error/404";
     }
 
     @ExceptionHandler(MyException.class)
-    public String myException(HttpServletRequest request, HttpServletResponse response, MyException ex,Model model) {
+    public String myException(HttpServletRequest request, HttpServletResponse response, MyException ex, Model model) {
         log.info(ex.getMsg());
-        if(ex.getCode() == 404){
-            model.addAttribute("url",request.getRequestURI());
+        if (ex.getCode() == 404) {
+            model.addAttribute("url", request.getRequestURI());
             return "admin/error/404";
-        }else{
+        } else {
             RestResponse restResponse = RestResponse.failure(ex.getMessage());
-            model.addAttribute("url",restResponse);
+            model.addAttribute("url", restResponse);
             return "admin/error/500";
         }
     }

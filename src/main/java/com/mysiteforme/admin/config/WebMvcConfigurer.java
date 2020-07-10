@@ -5,25 +5,17 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.mysiteforme.admin.base.BlogHandlerInterceptor;
 import com.mysiteforme.admin.base.MyHandlerInterceptor;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.MultipartConfigElement;
 import java.nio.charset.Charset;
@@ -53,9 +45,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     /**
-     *  fastjson序列化
-     *
-     * */
+     * fastjson序列化
+     */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
@@ -65,10 +56,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         fastJsonHttpMessageConverter.setSupportedMediaTypes(supportedMediaTypes);
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");    // 自定义时间格式
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat,SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteNullNumberAsZero,SerializerFeature.WriteNullBooleanAsFalse,SerializerFeature.WriteMapNullValue,
-                SerializerFeature.WriteNullStringAsEmpty,SerializerFeature.WriteNullListAsEmpty,SerializerFeature.WriteDateUseDateFormat,
-                SerializerFeature.BrowserCompatible,SerializerFeature.WriteNonStringKeyAsString);
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteNullBooleanAsFalse, SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullListAsEmpty, SerializerFeature.WriteDateUseDateFormat,
+                SerializerFeature.BrowserCompatible, SerializerFeature.WriteNonStringKeyAsString);
         converters.add(fastJsonHttpMessageConverter);
         converters.add(responseBodyConverter());
     }
@@ -97,7 +88,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyHandlerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login","/login/main","/logout","/genCaptcha","/static/**","/showBlog/**");
+                .excludePathPatterns("/login", "/login/main", "/logout", "/genCaptcha", "/static/**", "/showBlog/**");
         registry.addInterceptor(new BlogHandlerInterceptor())
                 .addPathPatterns("/showBlog/**");
         super.addInterceptors(registry);
