@@ -103,6 +103,9 @@ public class RoleController extends BaseController {
         if (roleService.getRoleNameCount(role.getName()) > 0) {
             return RestResponse.failure("角色名称已存在");
         }
+        if (role.getMenuSet().isEmpty()) {
+            return RestResponse.failure("请分配角色权限");
+        }
         roleService.saveRole(role);
         return RestResponse.success();
     }

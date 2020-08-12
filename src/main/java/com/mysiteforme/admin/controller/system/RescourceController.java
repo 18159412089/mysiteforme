@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.mysiteforme.admin.annotation.SysLog;
 import com.mysiteforme.admin.base.BaseController;
 import com.mysiteforme.admin.entity.Rescource;
+import com.mysiteforme.admin.service.impl.OssUploadServiceImpl;
 import com.mysiteforme.admin.util.LayerData;
 import com.mysiteforme.admin.util.QiniuFileUtil;
 import com.mysiteforme.admin.util.RestResponse;
@@ -78,7 +79,11 @@ public class RescourceController extends BaseController {
             return RestResponse.failure("请求参数不正确");
         }
         for (Rescource rescource : rescources) {
-            QiniuFileUtil.deleteQiniuP(rescource.getWebUrl());
+            if (rescource.getSource().equals("oss")) {
+                uploadService.delete(rescource.getWebUrl());
+            } else if (rescource.getSource().equals("qiniu")) {
+                QiniuFileUtil.deleteQiniuP(rescource.getWebUrl());
+            }
         }
         rescourceService.deleteBatchIds(ids);
         return RestResponse.success();
