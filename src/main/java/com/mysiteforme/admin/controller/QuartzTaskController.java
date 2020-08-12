@@ -54,6 +54,7 @@ public class QuartzTaskController {
         LayerData<QuartzTask> layerData = new LayerData<>();
         EntityWrapper<QuartzTask> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag", false);
+        wrapper.orderBy("create_date", false);
         if (!map.isEmpty()) {
             String name = (String) map.get("name");
             if (StringUtils.isNotBlank(name)) {

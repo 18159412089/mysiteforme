@@ -40,6 +40,7 @@ public class LogController extends BaseController {
         Map map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<Log> layerData = new LayerData<>();
         EntityWrapper<Log> wrapper = new EntityWrapper<>();
+        wrapper.orderBy("create_date", false);
         if (!map.isEmpty()) {
             String keys = (String) map.get("type");
             if (StringUtils.isNotBlank(keys)) {

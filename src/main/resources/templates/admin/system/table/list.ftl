@@ -36,7 +36,7 @@
     <table class="layui-table" id="test" lay-filter="demo"></table>
 
     <script type="text/html" id="comment">
-        <!-- 这里的 checked 的状态只是演示 -->
+<#--        这里的 checked 的状态只是演示-->
         {{#  if(d.comment != null && d.comment != ''){ }}
         {{#  layui.each(d.comment.split(','), function(index, item){ }}
         {{# if(item == '1'){ }}
@@ -52,7 +52,7 @@
         {{# }else if(item.indexOf('timer')>=0){ }}
         <span class="layui-badge layui-bg-green">时间控件</span>
         {{# }else if(item.indexOf('editor')>=0){ }}
-        <span class="layui-badge layui-bg-green">编辑器控件</span>
+        <span class="layui-badge layui-bg-green">编辑器控件
         {{# }else if(item.indexOf('switch')>=0){ }}
         <span class="layui-badge layui-bg-green">开关控件</span>
         {{# } }}
@@ -121,11 +121,11 @@
                             layer.full(index);
                             layer.iframeAuto(index);
                         });
-                        setTimeout(function(){
+                       /* setTimeout(function(){
                             layer.tips('点击此处返回数据表列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
-                        },500);
+                        },500);*/
                     },
                     cancel: function (index) {
                         $(window).unbind("resize", resizeFun);

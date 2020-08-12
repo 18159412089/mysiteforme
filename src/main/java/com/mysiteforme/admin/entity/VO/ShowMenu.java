@@ -15,8 +15,17 @@ public class ShowMenu implements Serializable {
     private String title;
     private String icon;
     private String href;
+    private String bgColor;
     private Boolean spread = false;
     private List<ShowMenu> children = Lists.newArrayList();
+
+    public String getBgColor() {
+        return bgColor;
+    }
+
+    public void setBgColor(String bgColor) {
+        this.bgColor = bgColor;
+    }
 
     public Long getId() {
         return id;

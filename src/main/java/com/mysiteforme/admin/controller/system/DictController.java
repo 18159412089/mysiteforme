@@ -63,7 +63,7 @@ public class DictController extends BaseController {
                 wrapper.like("label", label);
             }
         }
-        wrapper.orderBy("type", false).orderBy("sort", false);
+        wrapper.orderBy("create_date",false);
         Page<Dict> dataPage = dictService.selectPage(new Page<>(page, limit), wrapper);
         layerData.setCount(dataPage.getTotal());
         layerData.setData(dataPage.getRecords());

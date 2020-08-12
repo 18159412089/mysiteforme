@@ -44,6 +44,7 @@ public class RescourceController extends BaseController {
         Map map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<Rescource> layerData = new LayerData<>();
         EntityWrapper<Rescource> wrapper = new EntityWrapper<>();
+        wrapper.orderBy("create_date", false);
         if (!map.isEmpty()) {
             String type = (String) map.get("type");
             if (StringUtils.isNotBlank(type)) {

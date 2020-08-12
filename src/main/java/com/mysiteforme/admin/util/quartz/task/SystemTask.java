@@ -3,6 +3,7 @@ package com.mysiteforme.admin.util.quartz.task;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.mysiteforme.admin.entity.BlogArticle;
 import com.mysiteforme.admin.service.BlogArticleService;
+import com.mysiteforme.admin.service.LogService;
 import com.xiaoleilu.hutool.log.Log;
 import com.xiaoleilu.hutool.log.LogFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,8 @@ public class SystemTask {
 
     @Autowired
     private BlogArticleService blogArticleService;
+    @Autowired
+    private LogService logService;
 
     /**
      * 同步文章点击量
@@ -57,6 +60,13 @@ public class SystemTask {
      */
     public void createArticleIndex(String params) {
         blogArticleService.createArticlIndex();
+    }
+
+    /**
+     * 生成文章搜索索引
+     */
+    public void clearLog(String params) {
+        logService.deleteById(100L);
     }
 
 }

@@ -52,6 +52,7 @@ public class QuartzTaskLogController {
         LayerData<QuartzTaskLog> layerData = new LayerData<>();
         EntityWrapper<QuartzTaskLog> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag", false);
+        wrapper.orderBy("create_date", false);
         if (!map.isEmpty()) {
             String name = (String) map.get("name");
             if (StringUtils.isNotBlank(name)) {

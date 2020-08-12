@@ -106,6 +106,7 @@
         <result property="title"    column="title"/>
         <result property="icon"     column="icon"/>
         <result property="href"     column="href"/>
+        <result property="bgColor"     column="bgColor"/>
         <collection property="children" select="selectShowMenuByUser"  column="{parentId = id,userId = myuserId}">
         </collection>
     </resultMap>
@@ -117,6 +118,7 @@
         m.name      as "title",
         m.icon      as "icon",
         m.href      as "href",
+        m.bg_color      as "bgColor",
         m.sort,
         #{userId}   as "myuserId"
         FROM
