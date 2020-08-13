@@ -238,9 +238,9 @@ public class TableController extends BaseController {
         if (StringUtils.isBlank(name)) {
             return null;
         }
-        if (tableType != 1 && tableType != 2 && tableType != 3) {
+        /*if (tableType != 1 && tableType != 2 && tableType != 3) {
             return null;
-        }
+        }*/
         Map<String, Object> map = Maps.newHashMap();
         map.put("name", name);
         map.put("tableType", tableType);
