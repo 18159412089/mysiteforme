@@ -148,11 +148,11 @@
                         function(){
                             $.post("${base}/admin/system/dict/deleteById",{"id":data.id},function (res){
                                 if(res.success){
-                                    layer.msg("删除成功",{time: 1000},function(){
+                                    layer.msg("删除成功",{icon: 1},{time: 1000},function(){
                                         table.reload('test', t);
                                     });
                                 }else{
-                                    layer.msg(res.message);
+                                   layer.msg(res.message, {icon: 2});
                                 }
 
                             });
@@ -235,9 +235,9 @@
             }
             $.post("${base}/admin/system/dict/editType",data.field,function(res){
                 if(!res.success){
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }else{
-                    layer.msg("修改成功",{time:1000},function () {
+                    layer.msg("修改成功",{icon: 1},{time:1000},function () {
                         table.reload('test', t);
                     })
                 }

@@ -252,7 +252,7 @@
                             next(html, page < res.data.pages);
                         });
                     } else{
-                        layer.msg(res.message);
+                       layer.msg(res.message, {icon: 2});
                     }
                 });
             }
@@ -283,7 +283,7 @@
                     $("#commentList").html("");
                     flow.load(f);
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;
@@ -309,7 +309,7 @@
                     $(data.form).parent('.replycontainer').siblings('hr').after(html).siblings('.comment-parent').children('p').children('a').click();
                     flow.load(f);
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
 

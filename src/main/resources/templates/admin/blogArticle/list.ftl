@@ -281,11 +281,11 @@
                         function(){
                             $.post("${base}/admin/blogArticle/delete",{"id":data.id},function (res){
                                 if(res.success){
-                                    layer.msg("删除成功",{time: 1000},function(){
+                                    layer.msg("删除成功",{icon: 1},{time: 1000},function(){
                                         location.reload();
                                     });
                                 }else{
-                                    layer.msg(res.message);
+                                   layer.msg(res.message, {icon: 2});
                                 }
 
                             });

@@ -83,7 +83,7 @@
                 if(res.success){
                     location.href="${base}/"+res.data.url;
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                     $("#mycode").click();
                 }
             });

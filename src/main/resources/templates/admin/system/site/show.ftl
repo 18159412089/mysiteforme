@@ -278,7 +278,7 @@
                 if (res.success === false) {
                     return layer.msg('上传失败');
                 }else{
-                    layer.msg("上传成功",{time:1000},function () {
+                    layer.msg("上传成功",{icon: 1},{time:1000},function () {
                         $("input[name='authorIcon']").val(res.data.url);
                     })
                 }
@@ -331,12 +331,12 @@
             $.post('${base}/admin/system/site/edit',data.field,function (res) {
                 layer.close(loadIndex);
                if(res.success){
-                   layer.msg("站点信息更新成功",function () {
+                   layer.msg("站点信息更新成功",{icon: 1},function () {
                        location.reload();
                    });
 
                }else{
-                   layer.msg(res.message);
+                  layer.msg(res.message, {icon: 2});
                }
             });
             return false;

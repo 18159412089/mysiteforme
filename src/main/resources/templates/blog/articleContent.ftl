@@ -281,7 +281,7 @@
         $(function(){
             $.post("${base}/showBlog/click",{articleId:${article.id}},function (res) {
                if(!res.success){
-                   return layer.msg(res.message);
+                   returnlayer.msg(res.message, {icon: 2});
                }
             });
         });
@@ -320,7 +320,7 @@
                             next(html, page < res.data.pages);
                         });
                     } else{
-                        layer.msg(res.message);
+                       layer.msg(res.message, {icon: 2});
                     }
                 });
             }
@@ -351,7 +351,7 @@
                         flow.load(f);
                     });
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;

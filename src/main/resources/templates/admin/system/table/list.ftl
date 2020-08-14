@@ -143,11 +143,11 @@
                         function(){
                             $.post("${base}/admin/system/table/delete",{"tableName":data.name},function (res){
                                 if(res.success){
-                                    layer.msg("删除成功",{time: 1000},function(){
+                                    layer.msg("删除成功",{icon: 1},{time: 1000},function(){
                                         table.reload('test', t);
                                     });
                                 }else{
-                                    layer.msg(res.message);
+                                   layer.msg(res.message, {icon: 2});
                                 }
 
                             });

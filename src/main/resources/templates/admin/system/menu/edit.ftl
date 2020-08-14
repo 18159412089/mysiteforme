@@ -130,11 +130,11 @@
 
         form.on("submit(addUser)",function(data){
             if(data.field.id == null){
-                layer.msg("菜单ID不存在",{time:1000});
+                layer.msg("菜单ID不存在",{icon: 7},{time:1000});;
                 return false;
             }
             if(data.field.sort<0){
-                layer.msg("排序值不能为负数",{time:1000});
+                layer.msg("排序值不能为负数",{icon: 7},{time:1000});;
                 return false;
             }
             if(undefined !== data.field.isShow && null != data.field.isShow){
@@ -148,12 +148,12 @@
             $.post("${base}/admin/system/menu/edit",data.field,function (res) {
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("菜单编辑成功!",{time:1500},function(){
+                    parent.layer.msg("菜单编辑成功!",{icon: 1},{time:1500},function(){
                         //刷新父页面
                         parent.location.reload();
                     });
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;

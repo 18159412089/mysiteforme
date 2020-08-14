@@ -496,7 +496,7 @@
                             // t.width = ($(parent.window).width()-20)*0.8-110;
                             table.reload('demo',t);
                         } else{
-                            layer.msg(res.message);
+                           layer.msg(res.message, {icon: 2});
                         }
                     });
                 }else{
@@ -586,11 +586,11 @@
                     success:function(res){
                         layer.close(loadIndex);
                         if(res.success){
-                            layer.msg("字段新增成功",{time:1000},function () {
+                            layer.msg("字段新增成功",{icon: 1},{time:1000},function () {
                                 location.reload();
                             });
                         }else{
-                            layer.msg(res.message,{time:1000});
+                            layer.msg(res.message, {icon: 2},{time:1000});
                         }
                     }
                 });
@@ -680,11 +680,11 @@
                     success:function(res){
                         layer.close(loadIndex);
                         if(res.success){
-                            layer.msg("字段编辑成功",{time:1000},function () {
+                            layer.msg("字段编辑成功",{icon: 1},{time:1000},function () {
                                 location.reload();
                             });
                         }else{
-                            layer.msg(res.message,{time:1000});
+                            layer.msg(res.message, {icon: 2},{time:1000});
                         }
                     }
                 });
@@ -704,11 +704,11 @@
                     //删除表格数据
                     $.post("${base}/admin/system/table/deleteField",{fieldName:data.name,tableName:'${tableVO.name}'},function(res){
                         if(res.success){
-                            layer.msg("删除成功",{time:1000},function () {
+                            layer.msg("删除成功",{icon: 1},{time:1000},function () {
                                 location.reload();
                             });
                         }else{
-                            layer.msg(res.message);
+                           layer.msg(res.message, {icon: 2});
                         }
                     });
                     layer.close(index);
@@ -849,12 +849,12 @@
             $.post('${base}/admin/system/table/editTable',data.field,function (res) {
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("数据表更新成功!",{time:1500},function(){
+                    parent.layer.msg("数据表更新成功!",{icon: 1},{time:1500},function(){
                         //刷新父页面
                         parent.location.reload();
                     });
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;

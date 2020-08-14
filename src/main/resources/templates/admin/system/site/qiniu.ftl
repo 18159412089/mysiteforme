@@ -106,12 +106,12 @@
                 success:function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("七牛云信息更新成功!",{time:1500},function(){
+                        parent.layer.msg("七牛云信息更新成功!",{icon: 1},{time:1500},function(){
                             //刷新父页面
                             parent.layer.closeAll();
                         });
                     }else{
-                        parent.layer.msg(res.message,{time:1500},function(){
+                        parent.layer.msg(res.message,{icon: 2},{time:1500},function(){
                             //刷新父页面
                             parent.location.reload();
                         });

@@ -139,12 +139,12 @@
             $.post("${base}/admin/system/menu/add",data.field,function (res) {
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("菜单添加成功!",{time:1500},function(){
+                    parent.layer.msg("菜单添加成功!",{icon: 1},{time:1500},function(){
                         //刷新父页面
                         parent.location.reload();
                     });
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;

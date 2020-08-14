@@ -273,7 +273,7 @@
                             t.before('<a href="javascript:;" class="listTag" data-id="'+res.data.id+'"><span >'+res.data.name+'</span></a>');
                             layer.close(index);
                         }else{
-                            layer.msg(res.message,{time:1000});
+                            layer.msg(res.message, {icon: 2},{time:1000});
                             elem.val("");
                         }
                     });
@@ -368,7 +368,7 @@
                 data.field.recommend = true;
             }
             if(undefined === data.field.category || null == data.field.category){
-                layer.msg("文章类型不能为空",{time:1000});
+                layer.msg("文章类型不能为空",{icon: 7},{time:1000});;
                 return false;
             }
             //博客标签数据
@@ -391,13 +391,13 @@
                 success: function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("博客内容添加成功！",{time:1000},function(){
+                        parent.layer.msg("博客内容添加成功！",{icon: 1},{time:1000},function(){
                             parent.layer.close(parent.addIndex);
                             //刷新父页面
                             parent.location.reload();
                         });
                     }else{
-                        layer.msg(res.message);
+                       layer.msg(res.message, {icon: 2});
                     }
                 }
             });

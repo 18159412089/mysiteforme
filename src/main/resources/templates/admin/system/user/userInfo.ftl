@@ -96,7 +96,7 @@
                 if (res.success === false) {
                     return layer.msg('上传失败');
                 }else{
-                    layer.msg("上传成功",{time:1000},function () {
+                    layer.msg("上传成功",{icon: 1},{time:1000},function () {
                         $("input[name='icon']").val(res.data.url);
                     })
                 }
@@ -114,11 +114,11 @@
             $.post("${base}/admin/system/user/saveUserinfo",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("您的个人信息保存成功！",{time:1500},function(){
+                    parent.layer.msg("您的个人信息保存成功！",{icon: 1},{time:1500},function(){
                         parent.location.reload();
                     });
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;

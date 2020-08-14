@@ -173,11 +173,11 @@
                     function(){
                         $.post("${base}/admin/system/log/delete",{"ids":[data.id]},function (res){
                            if(res.success){
-                               layer.msg("删除成功",{time: 1000},function(){
+                               layer.msg("删除成功",{icon: 1},{time: 1000},function(){
                                    table.reload('test', t);
                                });
                            }else{
-                               layer.msg(res.message);
+                              layer.msg(res.message, {icon: 2});
                            }
 
                         });
@@ -228,17 +228,17 @@
                             }
                             $.post("${base}/admin/system/log/delete",{ids:d},function (res) {
                                 if(res.success){
-                                    layer.msg("删除成功",{time: 1000},function(){
+                                    layer.msg("删除成功",{icon: 1},{time: 1000},function(){
                                         table.reload('test', t);
                                     });
                                 }else{
-                                    layer.msg(res.message);
+                                   layer.msg(res.message, {icon: 2});
                                 }
                             });
                         }
                     )
                 }else{
-                    layer.msg("请选择需要删除的日志",{time:1000});
+                    layer.msg("请选择需要删除的日志",{icon: 7},{time:1000});;
                 }
             }
         };

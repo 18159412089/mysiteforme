@@ -80,7 +80,7 @@
                         parent.location.href = "${base}/systemLogout";
                     })
                 }else{
-                    layer.msg(res.message);
+                   layer.msg(res.message, {icon: 2});
                 }
             });
             return false;
