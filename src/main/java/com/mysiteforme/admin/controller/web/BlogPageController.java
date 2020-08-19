@@ -11,6 +11,7 @@ import com.mysiteforme.admin.entity.BlogComment;
 import com.mysiteforme.admin.exception.MyException;
 import com.mysiteforme.admin.lucene.LuceneSearch;
 import com.mysiteforme.admin.util.Constants;
+import com.mysiteforme.admin.util.LayerData;
 import com.mysiteforme.admin.util.RestResponse;
 import com.mysiteforme.admin.util.ToolUtil;
 import com.xiaoleilu.hutool.date.DateUtil;
@@ -21,7 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
@@ -452,6 +455,65 @@ public class BlogPageController extends BaseController {
         }
         model.addAttribute("channel", blogChannel);
         return "blog/share";
+    }
+
+    /* *
+     * @Description 对外开放接口  【咨讯文章查询】
+     * @ClassName BlogPageController
+     * @param page
+     * @param limit
+     * @param request
+     * @Return com.mysiteforme.admin.util.LayerData<com.mysiteforme.admin.entity.BlogArticle>
+     * @Date 2020/8/19 16:21
+     * @Author huangyl
+     */
+    @PostMapping("informationList")
+    @ResponseBody
+    public LayerData<BlogArticle> list(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
+                                       @RequestParam(value = "limit", defaultValue = "10", required = false) Integer limit,
+                                       ServletRequest request) {
+        Map<String, Object> map = WebUtils.getParametersStartingWith(request, "s_");
+        LayerData<BlogArticle> layerData = new LayerData<>();
+        EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
+        wrapper.eq("del_flag", false);
+        if (!map.isEmpty()) {
+            String title = (String) map.get("title");
+            if (StringUtils.isBlank(title)) {
+                map.remove("title");
+            }
+            String category = (String) map.get("category");
+            if (StringUtils.isBlank(category)) {
+                map.remove("category");
+            }
+            String beginPublistTime = (String) map.get("beginPublistTime");
+            String endPublistTime = (String) map.get("endPublistTime");
+            if (StringUtils.isNotBlank(beginPublistTime)) {
+                Date begin = DateUtil.parse(beginPublistTime);
+                map.put("publist_time", begin);
+            } else {
+                map.remove("beginPublistTime");
+            }
+            if (StringUtils.isNotBlank(endPublistTime)) {
+                Date end = DateUtil.parse(endPublistTime);
+                map.put("publist_time", end);
+            } else {
+                map.remove("endPublistTime");
+            }
+            String content = (String) map.get("content");
+            if (StringUtils.isBlank(content)) {
+                map.remove("content");
+            }
+            String channelId = (String) map.get("channelId");
+            if (StringUtils.isBlank(channelId)) {
+                map.remove("channelId");
+            }
+
+        }
+        Page<BlogArticle> pageData = blogArticleService.selectDetailArticle(map, new Page<>(page, limit));
+        layerData.setData(pageData.getRecords());
+        layerData.setCount(pageData.getTotal());
+        layerData.setMsg("操作成功");
+        return layerData;
     }
 
 }
