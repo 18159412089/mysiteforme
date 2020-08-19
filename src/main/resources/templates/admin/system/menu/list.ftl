@@ -147,7 +147,7 @@
                                 success:function(res){
                                     layer.close(deleteindex);
                                     if(res.success){
-                                        layer.msg("删除成功",{icon: 1},{time: 1000},function(){
+                                        layer.msg("删除成功",{icon: 1,time:1000},function(){
                                             location.reload();
                                         });
                                     }else{

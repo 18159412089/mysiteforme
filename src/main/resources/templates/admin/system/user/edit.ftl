@@ -126,7 +126,9 @@
                 success:function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("用户编辑成功！",{icon: 1},{time:1500},function(){
+                        parent.layer.msg("用户编辑成功！",{icon: 1,time:1500},function(){
+                            parent.layer.close(parent.editIndex);
+                            //刷新父页面
                             parent.location.reload();
                         });
                     }else{

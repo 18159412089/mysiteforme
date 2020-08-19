@@ -114,7 +114,7 @@
             $.post("${base}/admin/system/user/saveUserinfo",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("您的个人信息保存成功！",{icon: 1},{time:1500},function(){
+                    parent.layer.msg("您的个人信息保存成功！",{icon: 1,time:1000},function(){
                         parent.location.reload();
                     });
                 }else{

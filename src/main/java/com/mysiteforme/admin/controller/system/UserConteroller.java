@@ -9,6 +9,7 @@ import com.mysiteforme.admin.base.MySysUser;
 import com.mysiteforme.admin.entity.Role;
 import com.mysiteforme.admin.entity.User;
 import com.mysiteforme.admin.entity.VO.ShowMenu;
+import com.mysiteforme.admin.realm.AuthRealm;
 import com.mysiteforme.admin.util.Constants;
 import com.mysiteforme.admin.util.LayerData;
 import com.mysiteforme.admin.util.RestResponse;
@@ -125,6 +126,10 @@ public class UserConteroller extends BaseController {
     @ResponseBody
     @SysLog("保存系统用户编辑数据")
     public RestResponse edit(@RequestBody User user) {
+        User currentUser = getCurrentUser();
+        if (currentUser.getId() != 1 && user.getId() == 1) {
+            return RestResponse.failure("无权操作超级管理员信息");
+        }
         if (user.getId() == 0 || user.getId() == null) {
             return RestResponse.failure("用户ID不能为空");
         }

@@ -109,7 +109,7 @@
                 success:function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("阿里云信息更新成功!",{icon: 1},{time:1500},function(){
+                        parent.layer.msg("阿里云信息更新成功!",{icon: 1,time:1000},function(){
                             //刷新父页面
                             parent.layer.closeAll();
                         });

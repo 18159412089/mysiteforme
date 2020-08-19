@@ -138,7 +138,7 @@
             </otherwise>
         </choose>
         and m.is_show = true
-        order by m.sort desc
+        order by m.sort asc
     </select>
 
     <!--<insert id="saveRoleMenus">-->

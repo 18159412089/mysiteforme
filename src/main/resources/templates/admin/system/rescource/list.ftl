@@ -128,7 +128,7 @@
                     function(){
                         $.post("${base}/admin/system/rescource/delete",{"ids":[data.id]},function (res){
                            if(res.success){
-                               layer.msg("删除成功",{icon: 1},{time: 1000},function(){
+                               layer.msg("删除成功",{icon: 1,time:1000},function(){
                                    table.reload('test', t);
                                });
                            }else{
@@ -161,7 +161,7 @@
                             }
                             $.post("${base}/admin/system/rescource/delete",{ids:d},function (res) {
                                 if(res.success){
-                                    layer.msg("删除成功",{icon: 1},{time: 1000},function(){
+                                    layer.msg("删除成功",{icon: 1,time:1000},function(){
                                         table.reload('test', t);
                                     });
                                 }else{

@@ -113,7 +113,7 @@
                     function(){
                         $.post("${base}/admin/system/user/delete",{"id":data.id},function (res){
                            if(res.success){
-                               layer.msg("删除成功",{icon: 1},{time: 1000},function(){
+                               layer.msg("删除成功",{icon: 1,time: 1000},function(){
                                    table.reload('test', t);
                                });
                            }else{
@@ -171,7 +171,7 @@
                                 success:function(res){
                                     layer.close(deleteindex);
                                     if(res.success){
-                                        layer.msg("删除成功",{icon: 1},{time: 1000},function(){
+                                        layer.msg("删除成功",{icon: 1,time:1000},function(){
                                             table.reload('test', t);
                                         });
                                     }else{
