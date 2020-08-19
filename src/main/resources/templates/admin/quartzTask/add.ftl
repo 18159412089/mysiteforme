@@ -107,7 +107,7 @@
             $.post("${base}/admin/quartzTask/add",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("定时任务添加成功！",{icon: 1},{time:1000},function(){
+                    parent.layer.msg("定时任务添加成功！",{icon: 1,time:1000},function(){
                         parent.layer.close(parent.addIndex);
                         //刷新父页面
                         parent.location.reload();

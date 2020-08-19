@@ -2,7 +2,7 @@
 <html class="loginHtml">
 <head>
     <meta charset="utf-8">
-    <title>MySiteForMe系统后台--孤独的旅行家</title>
+    <title>系统后台--生菜科技</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,7 @@
 <body>
 <div id="bg-body"></div>
 <div class="login">
-    <h1>孤独的旅行家</h1>
+    <h1>生菜科技</h1>
     <form class="layui-form" action="${base}/login/main" method="post">
         <div class="layui-form-item">
             <input class="layui-input" name="username" value="test" placeholder="请输入用户名" lay-verify="required" type="text" autocomplete="off">

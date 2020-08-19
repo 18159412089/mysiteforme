@@ -436,7 +436,7 @@
                         parent.zTreeObj.selectNode(node);
                         parent.zTreeObj.setting.callback.onClick(null, parent.zTreeObj.setting.treeId, node);
                         parent.layer.closeAll();
-                        parent.layer.msg("博客内容更新成功！",{icon: 1},{time:1000});
+                        parent.layer.msg("博客内容更新成功！",{icon: 1,time:1000});
                     }else{
                        layer.msg(res.message, {icon: 2});
                     }

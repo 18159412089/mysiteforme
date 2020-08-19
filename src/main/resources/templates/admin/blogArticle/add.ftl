@@ -391,7 +391,7 @@
                 success: function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("博客内容添加成功！",{icon: 1},{time:1000},function(){
+                        parent.layer.msg("博客内容添加成功！",{icon: 1,time:1000},function(){
                             parent.layer.close(parent.addIndex);
                             //刷新父页面
                             parent.location.reload();

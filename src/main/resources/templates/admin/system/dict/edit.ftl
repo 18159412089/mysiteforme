@@ -85,7 +85,7 @@
             $.post("${base}/admin/system/dict/edit",data.field,function(res){
                layer.close(loadIndex);
                if(res.success){
-                   parent.layer.msg("字典编辑成功!",{icon: 1},{time:1000},function(){
+                   parent.layer.msg("字典编辑成功!",{icon: 1,time:1000},function(){
                        //刷新父页面
                        parent.location.reload();
                    });

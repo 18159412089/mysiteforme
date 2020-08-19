@@ -108,7 +108,7 @@
             $.post("${base}/admin/quartzTask/edit",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("定时任务编辑成功！",{icon: 1},{time:1000},function(){
+                    parent.layer.msg("定时任务编辑成功！",{icon: 1,time:1000},function(){
                         parent.layer.close(parent.editIndex);
                         //刷新父页面
                         parent.location.reload();

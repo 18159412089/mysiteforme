@@ -586,7 +586,7 @@
                     success:function(res){
                         layer.close(loadIndex);
                         if(res.success){
-                            layer.msg("字段新增成功",{icon: 1},{time:1000},function () {
+                            layer.msg("字段新增成功",{icon: 1,time:1000},function () {
                                 location.reload();
                             });
                         }else{
@@ -680,7 +680,7 @@
                     success:function(res){
                         layer.close(loadIndex);
                         if(res.success){
-                            layer.msg("字段编辑成功",{icon: 1},{time:1000},function () {
+                            layer.msg("字段编辑成功",{icon: 1,time:1000},function () {
                                 location.reload();
                             });
                         }else{
@@ -704,7 +704,7 @@
                     //删除表格数据
                     $.post("${base}/admin/system/table/deleteField",{fieldName:data.name,tableName:'${tableVO.name}'},function(res){
                         if(res.success){
-                            layer.msg("删除成功",{icon: 1},{time:1000},function () {
+                            layer.msg("删除成功",{icon: 1,time:1000},function () {
                                 location.reload();
                             });
                         }else{

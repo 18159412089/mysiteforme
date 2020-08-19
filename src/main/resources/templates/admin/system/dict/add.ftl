@@ -82,7 +82,7 @@
             $.post("${base}/admin/system/dict/add",data.field,function(res){
                layer.close(loadIndex);
                if(res.success){
-                   parent.layer.msg("字典添加成功!",{icon: 1},{time:1000},function(){
+                   parent.layer.msg("字典添加成功!",{icon: 1,time:1000},function(){
                        //刷新父页面
                        parent.location.reload();
                    });

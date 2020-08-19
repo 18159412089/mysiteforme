@@ -160,7 +160,7 @@
             $.post("${base}/admin/blogComment/adminReplay",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("回复成功！",{icon: 1},{time:1000},function(){
+                    parent.layer.msg("回复成功！",{icon: 1,time:1000},function(){
                         parent.layer.closeAll();
                         //刷新父页面
                         parent.location.reload();
