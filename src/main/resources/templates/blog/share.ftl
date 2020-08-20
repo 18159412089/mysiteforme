@@ -35,7 +35,7 @@
                             </a>
                         </div>
                         <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
-                        <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                        <p class="resource-abstract">本文章使用的时光轴的源码，手工打造！</p>
                         <div class="resource-info">
                             <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
                             <span class="author"><i class="fa fa-user fa-fw"></i>Absolutely</span>
@@ -53,7 +53,7 @@
                             </a>
                         </div>
                         <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
-                        <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                        <p class="resource-abstract">本文章使用的时光轴的源码，手工打造！</p>
                         <div class="resource-info">
                             <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
                             <span class="author"><i class="fa fa-user fa-fw"></i>Absolutely</span>
@@ -71,7 +71,7 @@
                             </a>
                         </div>
                         <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
-                        <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                        <p class="resource-abstract">本文章使用的时光轴的源码，手工打造！</p>
                         <div class="resource-info">
                             <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
                             <span class="author"><i class="fa fa-user fa-fw"></i>Absolutely</span>
@@ -89,7 +89,7 @@
                             </a>
                         </div>
                         <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
-                        <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                        <p class="resource-abstract">本文章使用的时光轴的源码，手工打造！</p>
                         <div class="resource-info">
                             <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
                             <span class="author"><i class="fa fa-user fa-fw"></i>Absolutely</span>
@@ -107,7 +107,7 @@
                             </a>
                         </div>
                         <h1 class="resource-title"><a href="javascript:layer.msg(&#39;这里填演示地址&#39;)" target="_blank">时光轴</a></h1>
-                        <p class="resource-abstract">本博客使用的时光轴的源码，手工打造！</p>
+                        <p class="resource-abstract">本文章使用的时光轴的源码，手工打造！</p>
                         <div class="resource-info">
                             <span class="category"><a href="javascript:layer.msg(&#39;这里跳转到相应分类&#39;)"><i class="fa fa-tags fa-fw"></i>&nbsp;源码</a></span>
                             <span class="author"><i class="fa fa-user fa-fw"></i>Absolutely</span>

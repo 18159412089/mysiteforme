@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客标签--${site.name}</title>
+    <title>文章标签--${site.name}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,7 +19,7 @@
 </head>
 <body class="childrenBody">
 <fieldset class="layui-elem-field">
-  <legend>博客标签检索</legend>
+  <legend>文章标签检索</legend>
   <div class="layui-field-box">
     <form class="layui-form" id="searchForm">
     <div class="layui-inline" style="margin-left: 15px">
@@ -35,7 +35,7 @@
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-normal" data-type="addBlogTags">添加博客标签</a>
+            <a class="layui-btn layui-btn-normal" data-type="addBlogTags">添加文章标签</a>
         </div>
     </form>
   </div>
@@ -73,12 +73,12 @@
             var data = obj.data;
             if(obj.event === 'edit'){
                 var editIndex = layer.open({
-                    title : "编辑博客标签",
+                    title : "编辑文章标签",
                     type : 2,
                     content : "${base}/admin/blogTags/edit?id="+data.id,
                     success : function(layero, index){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客标签列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回文章标签列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -91,7 +91,7 @@
                 layer.full(editIndex);
             }
             if(obj.event === "del"){
-                layer.confirm("你确定要删除该博客标签么？",{btn:['是的,我确定','我再想想']},
+                layer.confirm("你确定要删除该文章标签么？",{btn:['是的,我确定','我再想想']},
                         function(){
                             var count = data.tagsUseCount;
                             if(count > 0){
@@ -140,7 +140,7 @@
                 {type:'checkbox'},
                 {field:'name', title: '标签名字'},
                 {field:'tagsUseCount', title: '使用次数',width:'9%'},
-                {field:'delFlag',    title: '博客标签状态',width:'12%',templet:'#userStatus'},
+                {field:'delFlag',    title: '文章标签状态',width:'12%',templet:'#userStatus'},
                 {field:'createDate',  title: '创建时间',width:'15%',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
                 {fixed: 'right', title:'操作',  width: '15%', align: 'center',toolbar: '#barDemo'}
             ]]
@@ -150,12 +150,12 @@
         var active={
             addBlogTags : function(){
                 var addIndex = layer.open({
-                    title : "添加博客标签",
+                    title : "添加文章标签",
                     type : 2,
                     content : "${base}/admin/blogTags/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客标签列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回文章标签列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);

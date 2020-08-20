@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客栏目添加--${site.name}</title>
+    <title>文章栏目添加--${site.name}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -250,7 +250,7 @@
             $.post("${base}/admin/blogChannel/add",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("博客栏目添加成功！",{icon: 1,time:1000},function(){
+                    parent.layer.msg("文章栏目添加成功！",{icon: 1,time:1000},function(){
                         parent.layer.close(parent.addIndex);
                         //刷新父页面
                         parent.location.reload();

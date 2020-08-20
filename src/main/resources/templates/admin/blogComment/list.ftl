@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客评论--${site.name}</title>
+    <title>文章评论--${site.name}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -52,7 +52,7 @@
 </head>
 <body class="childrenBody">
 <fieldset class="layui-elem-field">
-  <legend>博客评论检索</legend>
+  <legend>文章评论检索</legend>
   <div class="layui-field-box">
     <form class="layui-form" id="searchForm">
     <div class="layui-inline" style="margin-left: 15px">
@@ -78,7 +78,7 @@
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
         <#--<div class="layui-inline">-->
-            <#--<a class="layui-btn layui-btn-normal" data-type="addBlogComment">添加博客评论</a>-->
+            <#--<a class="layui-btn layui-btn-normal" data-type="addBlogComment">添加文章评论</a>-->
         <#--</div>-->
     </form>
   </div>
@@ -133,12 +133,12 @@
             var data = obj.data;
             if(obj.event === 'edit'){
                 var editIndex = layer.open({
-                    title : "回复博客评论",
+                    title : "回复文章评论",
                     type : 2,
                     content : "${base}/admin/blogComment/edit?id="+data.id,
                     success : function(layero, index){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客评论列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回文章评论列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -218,12 +218,12 @@
         var active={
             addBlogComment : function(){
                 var addIndex = layer.open({
-                    title : "添加博客评论",
+                    title : "添加文章评论",
                     type : 2,
                     content : "${base}/admin/blogComment/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客评论列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回文章评论列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);

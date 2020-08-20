@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客内容编辑--${site.name}</title>
+    <title>文章内容编辑--${site.name}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -390,7 +390,7 @@
                 data.field.recommend = true;
             }
 
-            //博客标签数据
+            //文章标签数据
             var d = [];
             $(".multiSelect").children("a").each(function () {
                 d.push({id:$(this).data("id")});
@@ -436,7 +436,7 @@
                         parent.zTreeObj.selectNode(node);
                         parent.zTreeObj.setting.callback.onClick(null, parent.zTreeObj.setting.treeId, node);
                         parent.layer.closeAll();
-                        parent.layer.msg("博客内容更新成功！",{icon: 1,time:1000});
+                        parent.layer.msg("文章内容更新成功！",{icon: 1,time:1000});
                     }else{
                        layer.msg(res.message, {icon: 2});
                     }

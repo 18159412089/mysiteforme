@@ -162,7 +162,7 @@
                 <@myindex limit = "5">
                     <#if (result?size>0)>
                         <#list result as items>
-                            <tr><td align="left">${items.title}</td><td>${items.publistTime?string("yyyy-MM-dd")}</td></tr>
+                            <tr><td align="left" class="${items.content}" title="点击查看详情" onclick="showcontent(this)">${items.title}</td><td>${items.publistTime?string("yyyy-MM-dd")}</td></tr>
                         </#list>
                     </#if>
                 </@myindex>
@@ -191,6 +191,14 @@
         });
     });
 
+    function showcontent(val) {
+        var contentIndex = layer.open({
+            type: 1,
+            title: val.innerHTML,
+            content: '<div class="detail-body" style="margin:20px;">'+val.className+'</div>'
+        });
+        layer.full(contentIndex);
+    }
 </script>
 </body>
 </html>

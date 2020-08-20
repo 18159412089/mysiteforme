@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>博客栏目--${site.name}</title>
+    <title>文章栏目--${site.name}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,7 +26,7 @@
 
 <body style="margin:10px 10px 0;">
 <fieldset class="layui-elem-field">
-    <legend>博客栏目</legend>
+    <legend>文章栏目</legend>
     <div class="layui-field-box">
         <div class="layui-inline">
             <a class="layui-btn layui-btn-normal" data-type="addUser">添加根栏目</a>
@@ -119,7 +119,7 @@
                     content : "${base}/admin/blogChannel/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -147,7 +147,7 @@
             content : "${base}/admin/blogChannel/add?parentId="+data,
             success : function(layero, addIndex){
                 setTimeout(function(){
-                    layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
@@ -167,7 +167,7 @@
             content : "${base}/admin/blogChannel/edit?id="+data,
             success : function(layero, index){
                 setTimeout(function(){
-                    layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
