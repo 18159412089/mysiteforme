@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.mysiteforme.admin.annotation.SysLog;
 import com.mysiteforme.admin.base.BaseController;
 import com.mysiteforme.admin.entity.BlogArticle;
 import com.mysiteforme.admin.entity.BlogChannel;
@@ -468,6 +469,7 @@ public class BlogPageController extends BaseController {
      * @Author huangyl
      */
     @PostMapping("informationList")
+    @SysLog("【对外暴露接口】咨讯文章查询")
     @ResponseBody
     public LayerData<BlogArticle> list(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10", required = false) Integer limit,

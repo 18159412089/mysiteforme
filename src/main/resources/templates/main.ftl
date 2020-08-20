@@ -190,6 +190,7 @@
             window.parent.addTab($(this));
         });
     });
+
 </script>
 </body>
 </html>

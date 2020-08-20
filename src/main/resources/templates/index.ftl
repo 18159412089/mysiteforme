@@ -26,7 +26,7 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main">
-            <a href="#" class="logo">生菜科技后台</a>
+            <a href="#" class="logo">生菜科技网站后台</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:" class="iconfont hideMenu icon-menu1"></a>
             <#--<!-- 搜索 &ndash;&gt;-->
