@@ -130,11 +130,11 @@
                     type : 2,
                     content : "${base}/admin/system/dict/edit?id="+data.id,
                     success : function(layero, index){
-                        setTimeout(function(){
+                       /* setTimeout(function(){
                             layer.tips('点击此处返回字典列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
-                        },500);
+                        },500);*/
                     }
                 });
                 //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -165,11 +165,11 @@
                     type : 2,
                     content : "${base}/admin/system/dict/add?type="+data.type,
                     success : function(layero, index){
-                        setTimeout(function(){
+                       /* setTimeout(function(){
                             layer.tips('点击此处返回字典列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
-                        },500);
+                        },500);*/
                     }
                 });
                 //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -201,11 +201,11 @@
                     type : 2,
                     content : "${base}/admin/system/dict/add",
                     success : function(layero, addIndex){
-                        setTimeout(function(){
+                        /*setTimeout(function(){
                             layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
-                        },500);
+                        },500);*/
                     }
                 });
                 //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）

@@ -19,7 +19,7 @@
     <h1>生菜科技</h1>
     <form class="layui-form" action="${base}/login/main" method="post">
         <div class="layui-form-item">
-            <input class="layui-input" name="username" value="test" placeholder="请输入用户名" lay-verify="required" type="text" autocomplete="off">
+            <input class="layui-input" name="username" value="super" placeholder="请输入用户名" lay-verify="required" type="text" autocomplete="off">
         </div>
         <div class="layui-form-item">
             <input class="layui-input" name="password" value="1" placeholder="请输入密码" lay-verify="required" type="password" autocomplete="off">

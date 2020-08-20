@@ -118,11 +118,11 @@
                     type : 2,
                     content : "${base}/admin/blogChannel/add",
                     success : function(layero, addIndex){
-                        setTimeout(function(){
+                       /* setTimeout(function(){
                             layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
-                        },500);
+                        },500);*/
                     }
                 });
                 //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -146,11 +146,11 @@
             type : 2,
             content : "${base}/admin/blogChannel/add?parentId="+data,
             success : function(layero, addIndex){
-                setTimeout(function(){
+               /* setTimeout(function(){
                     layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
-                },500);
+                },500);*/
             }
         });
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
@@ -166,11 +166,11 @@
             type : 2,
             content : "${base}/admin/blogChannel/edit?id="+data,
             success : function(layero, index){
-                setTimeout(function(){
+               /* setTimeout(function(){
                     layer.tips('点击此处返回文章栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
-                },500);
+                },500);*/
             }
         });
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）

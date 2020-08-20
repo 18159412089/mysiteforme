@@ -82,7 +82,7 @@
     <div class="layui-form-item" style="padding-left: 30%;">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="editRole">我要修改</button>
-            <button class="layui-btn layui-btn-primary">我不改了</button>
+            <button class="layui-btn layui-btn-primary" onclick="parent.layer.closeAll()">我不改了</button>
         </div>
     </div>
 </form>

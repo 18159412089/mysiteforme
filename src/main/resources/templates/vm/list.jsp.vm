@@ -162,7 +162,7 @@
             <a class="layui-btn" lay-submit="" lay-filter="searchForm">查询</a>
         </div>
         <div class="layui-inline" >
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <button class="layui-btn layui-layer-primary" onclick="parent.layer.closeAll()">取消</button>
         </div>
         <div class="layui-inline">
             <a class="layui-btn layui-btn-normal" data-type="add${entity}">添加$!{tablecomment}</a>
