@@ -177,10 +177,10 @@
         </tr>
         </tbody>
     </table>
-    <div class="layui-form-item" style="text-align: right;">
+    <div class="layui-form-item" style="text-align: center;">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="site">立即提交</button>
-            <button class="layui-btn layui-layer-primary" onclick="parent.layer.closeAll()">取消</button>
+<#--            <button class="layui-btn layui-layer-primary" onclick="parent.layer.closeAll()">取消</button>-->
         </div>
     </div>
 </form>
