@@ -301,7 +301,7 @@
             if(obj.event === "showcontent"){
                 var contentIndex = layer.open({
                     type: 1,
-                    title: 'content预览',
+                    title: data.title,
                     content: '<div class="detail-body" style="margin:20px;">'+data.content+'</div>'
                 });
                 layer.full(contentIndex);
