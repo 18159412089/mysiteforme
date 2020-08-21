@@ -73,7 +73,7 @@
                         <#if (result?size>0)>
                             <#list result as item>
                                 <#assign myhref = base+"/showBlog"+item.href/>
-                            <a href="${myhref}"><i class="layui-icon" style="font-size: 20px; color: white;">${item.logo}</i>&nbsp;${item.name}</a>
+                            <a href="${myhref}"><i class="layui-icon" style="font-size: 20px;">${item.logo}</i>&nbsp;${item.name}</a>
                             </#list>
                         </#if>
                     </@mychannel>
