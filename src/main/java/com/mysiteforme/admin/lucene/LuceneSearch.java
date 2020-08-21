@@ -177,10 +177,10 @@ public class LuceneSearch {
             Document doc = indexSearcher.doc(docID);
             Long id = Long.valueOf(doc.get("id"));
             String title = doc.get("title");
-            if (StringUtils.isNotBlank(title)) {
+            /*if (StringUtils.isNotBlank(title)) {
                 TokenStream tokenStream = analyzer.tokenStream("title", new StringReader(title));
                 title = highlighter.getBestFragment(tokenStream, title);
-            }
+            }*/
             String text = doc.get("text");
             if (StringUtils.isNotBlank(text)) {
                 TokenStream tokenStream = analyzer.tokenStream("text", new StringReader(text));
