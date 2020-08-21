@@ -97,6 +97,16 @@
 </div>
 <div class="row">
     <div class="sysNotice col">
+        <blockquote class="layui-elem-quote title">系统通知</blockquote>
+        <div class="layui-elem-quote layui-quote-nm">
+            <@ar channelid="6">
+                <#if (result?size>0)>
+                    <#list result as item>
+                        ${item.content}
+                    </#list>
+                </#if>
+            </@ar>
+        </div>
         <blockquote class="layui-elem-quote title">更新日志</blockquote>
         <div class="layui-elem-quote layui-quote-nm">
             <@ar channelid="7">
