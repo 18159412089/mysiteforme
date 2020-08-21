@@ -75,13 +75,13 @@ public class BlogChannelServiceImpl extends ServiceImpl<BlogChannelDao, BlogChan
         return selectCount(wrapper);
     }
 
-    @Cacheable(value = "channelData", key = "'blog_channel_top_limit'+#limit", unless = "#result == null or #result.size() == 0")
+//    @Cacheable(value = "channelData", key = "'blog_channel_top_limit'+#limit", unless = "#result == null or #result.size() == 0")
     @Override
     public List<BlogChannel> getChannelListByWrapper(int limit, EntityWrapper<BlogChannel> wrapper) {
         return selectPage(new Page<>(1, limit), wrapper).getRecords();
     }
 
-    @Cacheable(value = "channelData", key = "'blog_parent_channel_list_'+#channelId", unless = "#result == null or #result.size() == 0")
+//    @Cacheable(value = "channelData", key = "'blog_parent_channel_list_'+#channelId", unless = "#result == null or #result.size() == 0")
     @Override
     public List<BlogChannel> getParentsChannel(Long channelId) {
         EntityWrapper<BlogChannel> wrapper = new EntityWrapper<>();

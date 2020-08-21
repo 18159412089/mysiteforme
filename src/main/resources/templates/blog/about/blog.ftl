@@ -74,7 +74,7 @@
         <div class="blog-main">
             <div class="layui-tab layui-tab-brief shadow" lay-filter="tabAbout">
                 <ul class="layui-tab-title">
-                    <@mychannel limit="4" pid="${channel.parentId}">
+                    <@mychannel limit="6" pid="${channel.parentId}">
                         <#if (result?size>0)>
                             <#list result as item>
                                 <#assign myhref = base+"/showBlog"+item.href/>

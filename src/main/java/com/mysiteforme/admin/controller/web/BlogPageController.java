@@ -124,7 +124,7 @@ public class BlogPageController extends BaseController {
         if (StringUtils.isBlank(key)) {
             return RestResponse.failure("查询关键词不能为空");
         }
-        String[] field = {"title", "text"};
+        String[] field = {"title", "text", "marks"};
         Map<String, Object> data = luceneSearch.search(field, key, new Page<>(page, limit));
         return RestResponse.success().setData(data);
     }

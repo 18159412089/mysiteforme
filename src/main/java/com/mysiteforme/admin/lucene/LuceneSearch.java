@@ -111,6 +111,7 @@ public class LuceneSearch {
         doc.add(new TextField("title", blogArticle.getTitle(), Field.Store.YES));
         doc.add(new TextField("marks", blogArticle.getMarks() == null ? "" : blogArticle.getMarks(), Field.Store.YES));
         doc.add(new TextField("text", blogArticle.getText() == null ? "" : blogArticle.getText(), Field.Store.YES));
+        doc.add(new TextField("content", blogArticle.getContent() == null ? "" : blogArticle.getContent(), Field.Store.YES));
         doc.add(new StoredField("href", blogArticle.getBlogChannel().getHref()));
         doc.add(new StoredField("show_pic", blogArticle.getShowPic() == null ? "" : blogArticle.getShowPic()));
         writer.updateDocument(new Term("id", blogArticle.getId().toString()), doc);
