@@ -165,10 +165,10 @@
                     <div class="blog-module-title">友情链接</div>
                     <ul class="blogroll">
                         <@ar channelid = "16" limit="6">
-                            <#if (result?? && result?size>1)>
+                            <#if (result?? && result?size>0)>
                                 <#list result as item>
-                                    <#if (item_index>0)>
-                                        <li><a target="_blank" href="${item.outLinkUrl}" title="${item.title}">${item.title}</a></li>
+                                    <#if (item_index>-1)>
+                                        <li><a target="_blank" href="${item.outLinkUrl!}" title="${item.title!}">${item.title!}</a></li>
                                     </#if>
                                 </#list>
                             </#if>
