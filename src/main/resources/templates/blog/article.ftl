@@ -58,7 +58,8 @@
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
                             <div class="search-keywords  shadow">
-                                <input type="text" name="keywords" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
+                                <input type="text" style="display: none;">
+                                <input type="text" name="keywords" lay-verify="required" placeholder="输入关键词搜索" autocomplete="on" class="layui-input">
                             </div>
                             <div class="search-submit  shadow">
                                 <a class="search-btn" lay-submit="formSearch" lay-filter="formSearch"><i class="fa fa-search"></i></a>
@@ -95,23 +96,23 @@
                         </@myindex>
                     </ul>
                 </div>
-                <#--<div class="blog-module shadow">-->
-                    <#--<div class="blog-module-title">随便看看</div>-->
-                    <#--<ul class="fa-ul blog-module-ul">-->
-                        <#--<@myindex limit="8" order="sort">-->
-                            <#--<#if (result?size>0)>-->
-                                <#--<#list result as item>-->
-                        <#--<li><i class="fa-li fa fa-angle-double-right" style="margin: unset"></i><a href="${base+"/showBlog/articleContent/"+item.id}" target="_blank" title="${item.title}">-->
-                        <#--<#if item.title?length lt 18>-->
-                            <#--${item.title}-->
-                        <#--<#else>-->
-                            <#--${item.title[0..19]}...-->
-                        <#--</#if></a></li>-->
-                                <#--</#list>-->
-                            <#--</#if>-->
-                        <#--</@myindex>-->
-                    <#--</ul>-->
-                <#--</div>-->
+                <#--<div class="blog-module shadow">
+                    <div class="blog-module-title">随便看看</div>
+                    <ul class="fa-ul blog-module-ul">
+                        <@myindex limit="8" order="sort">
+                            <#if (result?size>0)>
+                                <#list result as item>
+                        <li><i class="fa-li fa fa-angle-double-right" style="margin: unset"></i><a href="${base+"/showBlog/articleContent/"+item.id}" target="_blank" title="${item.title}">
+                        <#if item.title?length lt 18>
+                            ${item.title}
+                        <#else>
+                            ${item.title[0..19]}...
+                        </#if></a></li>
+                                </#list>
+                            </#if>
+                        </@myindex>
+                    </ul>
+                </div>-->
                 <!--右边悬浮 平板或手机设备显示-->
                 <div class="category-toggle"><i class="fa fa-chevron-left"></i></div>
             </div>
@@ -208,6 +209,7 @@
             $.post("${base}/showBlog/search",data.field,function (res) {
                 if(res.success){
                     $(".blog-main-left").html("");
+                    debugger
                     var getTpl = demo.innerHTML;
                         laytpl(getTpl).render(res.data, function(html){
                             $(".blog-main-left").html(html);
