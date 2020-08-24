@@ -130,7 +130,7 @@
                                         <#if item.title?length lt 18>
                                             ${item.title}
                                         <#else>
-                                            ${item.title[0..19]}...
+                                            ${item.title[0..18]}...
                                         </#if></a></li>
                                 </#list>
                             </#if>
