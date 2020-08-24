@@ -14,10 +14,10 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ToolUtil {
 
@@ -277,6 +277,63 @@ public class ToolUtil {
         finalMap.put("city", city);
         finalMap.put("isp", isp);
         return finalMap;
+    }
+
+    /**
+     * 对象是否为空
+     *
+     * @param o String,List,Map,Object[],int[],long[]
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public static boolean isEmpty(Object o) {
+        if (o == null) {
+            return true;
+        }
+        if (o instanceof String) {
+            if (o.toString().trim().equals("")) {
+                return true;
+            }
+        } else if (o instanceof List) {
+            if (((List) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Map) {
+            if (((Map) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Set) {
+            if (((Set) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Object[]) {
+            if (((Object[]) o).length == 0) {
+                return true;
+            }
+        } else if (o instanceof int[]) {
+            if (((int[]) o).length == 0) {
+                return true;
+            }
+        } else if (o instanceof long[]) {
+            if (((long[]) o).length == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 是否为空 赋值为 ‘’
+     *
+     * @param o String,List,Map,Object[],int[],long[]
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public static String emptyStrDefault(String o) {
+        if (isEmpty(o)) {
+            return "";
+        }
+        return o;
     }
 
     public static void main(String args[]) throws Exception {

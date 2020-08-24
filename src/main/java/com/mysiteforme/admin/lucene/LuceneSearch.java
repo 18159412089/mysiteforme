@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mysiteforme.admin.entity.BlogArticle;
+import com.mysiteforme.admin.util.ToolUtil;
 import com.xiaoleilu.hutool.date.DateUtil;
 import com.xiaoleilu.hutool.date.TimeInterval;
 import com.xiaoleilu.hutool.log.Log;
@@ -128,6 +129,7 @@ public class LuceneSearch {
      * @throws Exception
      */
     public Map<String, Object> search(String[] field, String value, Page page) throws Exception {
+        TimeInterval timer = DateUtil.timer();
         Map<String, Object> dataMap = Maps.newHashMap();
         //索引库的存储目录
         Directory directory = FSDirectory.open(Paths.get(dir));
@@ -177,10 +179,10 @@ public class LuceneSearch {
             Document doc = indexSearcher.doc(docID);
             Long id = Long.valueOf(doc.get("id"));
             String title = doc.get("title");
-            /*if (StringUtils.isNotBlank(title)) {
-                TokenStream tokenStream = analyzer.tokenStream("title", new StringReader(title));
-                title = highlighter.getBestFragment(tokenStream, title);
-            }*/
+//            if (StringUtils.isNotBlank(title)) {
+//                TokenStream tokenStream = analyzer.tokenStream("title", new StringReader(title));
+//                title = highlighter.getBestFragment(tokenStream, title);
+//            }
             String text = doc.get("text");
             if (StringUtils.isNotBlank(text)) {
                 TokenStream tokenStream = analyzer.tokenStream("text", new StringReader(text));
@@ -192,15 +194,15 @@ public class LuceneSearch {
                 marks = highlighter.getBestFragment(tokenStream, marks);
             }
             String href = doc.get("href");
-            String showPic = doc.get("showPic");
+            String showPic = doc.get("show_Pic");
             //评分
             Explanation explanation = indexSearcher.explain(query, docID);
             map.put("id", id);
             map.put("href", href);
             map.put("showPic", showPic);
-            map.put("title", title);
-            map.put("text", text);
-            map.put("marks", marks);
+            map.put("title", ToolUtil.emptyStrDefault(title));
+            map.put("text", ToolUtil.emptyStrDefault(text));
+            map.put("marks", ToolUtil.emptyStrDefault(marks));
             DecimalFormat fnum = new DecimalFormat("##0.00");
             map.put("percent", fnum.format(explanation.getValue()));
             list.add(map);
@@ -209,7 +211,6 @@ public class LuceneSearch {
         }
         directoryReader.close();
         directory.close();
-        TimeInterval timer = DateUtil.timer();
         dataMap.put("time", DateUtil.formatBetween(timer.intervalRestart()));
         dataMap.put("key", value);
         return dataMap;

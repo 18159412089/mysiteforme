@@ -209,7 +209,6 @@
             $.post("${base}/showBlog/search",data.field,function (res) {
                 if(res.success){
                     $(".blog-main-left").html("");
-                    debugger
                     var getTpl = demo.innerHTML;
                         laytpl(getTpl).render(res.data, function(html){
                             $(".blog-main-left").html(html);
@@ -218,6 +217,12 @@
                     layer.msg(res.mssage);
                 }
             });
+        });
+
+        $("body").keydown(function () {
+            if (event.keyCode == "13") {//keyCode=13是回车键；数字不同代表监听的按键不同
+                $('.search-btn').click();
+            }
         });
     });
 </script>
