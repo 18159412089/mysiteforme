@@ -93,6 +93,13 @@
         <span ></span>
         {{#  } }}
     </script>
+ <script type="text/html" id="article">
+        {{#  if(d.articleId != "" && d.articleId != null){ }}
+        <span><button lay-event="showArticle" class="layui-btn layui-btn-warm layui-btn-sm">文章内容</button></span>
+        {{#  } else { }}
+        <span ><button lay-event="showArticle" class="layui-btn layui-btn-warm layui-btn-sm">网站留言</button></span>
+        {{#  } }}
+    </script>
 
     <script type="text/html" id="replyContent">
         {{#  if(d.replyContent != "" && d.replyContent != null){ }}
@@ -186,6 +193,13 @@
                     content: '<div class="detail-body" style="margin:20px;">'+data.replyContent+'</div>'
                 });
             }
+            if(obj.event === "showArticle") {
+                if (data.articleId == null) {
+                    window.open("${base}/showBlog/about/messages");
+                } else {
+                    window.open("${base}/showBlog/articleContent/" + data.articleId);
+                }
+            }
         });
 
         var t = {
@@ -203,6 +217,7 @@
             cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             cols: [[
                 {type:'checkbox'},
+                {field:'articleId', title: '文章内容',templet:'#article'},
                 {field:'content', title: '评论内容',templet:'#content'},
                 {field:'ip', title: 'ip'},
                 {field:'system', title: '操作系统'},
