@@ -178,11 +178,14 @@ public class LuceneSearch {
             int docID = scoreDocs[i].doc;
             Document doc = indexSearcher.doc(docID);
             Long id = Long.valueOf(doc.get("id"));
-            String title = doc.get("title");
-//            if (StringUtils.isNotBlank(title)) {
-//                TokenStream tokenStream = analyzer.tokenStream("title", new StringReader(title));
-//                title = highlighter.getBestFragment(tokenStream, title);
-//            }
+            String oldTitle = null,title = doc.get("title");
+            if (StringUtils.isNotBlank(title)) {
+                TokenStream tokenStream = analyzer.tokenStream("title", new StringReader(title));
+                oldTitle = highlighter.getBestFragment(tokenStream, title);
+            }
+            if (StringUtils.isNotBlank(oldTitle)) {
+                title = oldTitle;
+            }
             String text = doc.get("text");
             if (StringUtils.isNotBlank(text)) {
                 TokenStream tokenStream = analyzer.tokenStream("text", new StringReader(text));
