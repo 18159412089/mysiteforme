@@ -27,6 +27,7 @@ import org.springframework.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -471,9 +472,10 @@ public class BlogPageController extends BaseController {
     @PostMapping("informationList")
     @SysLog("【对外暴露接口】咨讯文章查询")
     @ResponseBody
+    @CrossOrigin
     public LayerData<BlogArticle> list(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10", required = false) Integer limit,
-                                       ServletRequest request) {
+                                       ServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<BlogArticle> layerData = new LayerData<>();
         EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
