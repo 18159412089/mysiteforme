@@ -64,8 +64,9 @@ public class WebLogAspect {
             }
         }
         String str = JSONObject.toJSONString(args);
-        sysLog.setParams(str.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : str);
+//        sysLog.setParams(str.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : str);
         String ip = ToolUtil.getClientIp(request);
+        sysLog.setParams(str);
         if ("0.0.0.0".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip) || "localhost".equals(ip) || "127.0.0.1".equals(ip)) {
             ip = "127.0.0.1";
         }
@@ -120,7 +121,8 @@ public class WebLogAspect {
             sysLog.setUsername(StringUtils.isNotBlank(MySysUser.nickName()) ? MySysUser.nickName() : MySysUser.loginName());
         }
         String retString = JSONObject.toJSONString(ret);
-        sysLog.setResponse(retString.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : retString);
+//        sysLog.setResponse(retString.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : retString);
+        sysLog.setResponse(retString);
         sysLog.setUseTime(System.currentTimeMillis() - startTime.get());
         sysLog.insert();
     }
