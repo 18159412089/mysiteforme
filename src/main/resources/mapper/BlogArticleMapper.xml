@@ -141,6 +141,10 @@
                 <when test="channelId == -1 or channelId == 0">
                     and a.channel_id is null
                 </when>
+                <when test="channelId == -2 ">
+                    and a.channel_id in ( select id from blog_channel where del_flag = 0 and parent_id = 22 )
+                </when>
+
                 <otherwise>
                     and a.channel_id = #{channelId}
                 </otherwise>
