@@ -502,7 +502,6 @@ public class BlogPageController extends BaseController {
      * @Author huangyl
      */
     @PostMapping("informationList")
-    @SysLog("【对外暴露接口】咨讯文章查询")
     @ResponseBody
     @CrossOrigin
     public LayerData<BlogArticle> list(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
@@ -550,6 +549,27 @@ public class BlogPageController extends BaseController {
         layerData.setCount(pageData.getTotal());
         layerData.setMsg("操作成功");
         return layerData;
+    }
+
+    /* *
+     * @Description 对外开放接口  【咨讯文章查询】
+     * @ClassName BlogPageController
+     * @param page
+     * @param limit
+     * @param request
+     * @Return com.mysiteforme.admin.util.LayerData<com.mysiteforme.admin.entity.BlogArticle>
+     * @Date 2020/8/19 16:21
+     * @Author huangyl
+     */
+    @PostMapping("informationListNoPage")
+    @ResponseBody
+    @CrossOrigin
+    public RestResponse informationListNoPage(ServletRequest request) {
+        Map<String, Object> map = WebUtils.getParametersStartingWith(request, "s_");
+        EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
+        wrapper.eq("del_flag", false);
+        List<BlogArticle> blogArticles = blogArticleService.selectList(wrapper);
+        return RestResponse.success().setData(blogArticles);
     }
 
 }
