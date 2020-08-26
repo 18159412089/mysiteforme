@@ -19,6 +19,7 @@ import com.xiaoleilu.hutool.date.DateUtil;
 import com.xiaoleilu.hutool.log.Log;
 import com.xiaoleilu.hutool.log.LogFactory;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -509,8 +510,6 @@ public class BlogPageController extends BaseController {
                                        ServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<BlogArticle> layerData = new LayerData<>();
-        EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
-        wrapper.eq("del_flag", false);
         if (!map.isEmpty()) {
             String title = (String) map.get("title");
             if (StringUtils.isBlank(title)) {
@@ -552,7 +551,7 @@ public class BlogPageController extends BaseController {
     }
 
     /* *
-     * @Description 对外开放接口  【咨讯文章查询】
+     * @Description 对外开放接口  【咨讯文章查询无分页】
      * @ClassName BlogPageController
      * @param page
      * @param limit
@@ -565,11 +564,29 @@ public class BlogPageController extends BaseController {
     @ResponseBody
     @CrossOrigin
     public RestResponse informationListNoPage(ServletRequest request) {
-        Map<String, Object> map = WebUtils.getParametersStartingWith(request, "s_");
         EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag", false);
         List<BlogArticle> blogArticles = blogArticleService.selectList(wrapper);
         return RestResponse.success().setData(blogArticles);
+    }
+
+    /* *
+     * @Description 对外开放接口 【案例类型】
+     * @ClassName BlogPageController
+     * @param id
+     * @Return com.mysiteforme.admin.util.RestResponse
+     * @Date 2020/8/26 15:20
+     * @Author huangyl
+     */
+    @PostMapping("getCaseTypeList")
+    @ResponseBody
+    @CrossOrigin
+    public RestResponse getCaseTypeList(@RequestParam(value = "id", required = false, defaultValue = "22") long id) {
+        EntityWrapper<BlogChannel> wrapper = new EntityWrapper<>();
+        wrapper.eq("del_flag", false);
+        wrapper.eq("parent_id", id);
+        List<BlogChannel> channelList = blogChannelService.getChannelListByWrapper(10, wrapper);
+        return RestResponse.success().setData(channelList);
     }
 
 }
