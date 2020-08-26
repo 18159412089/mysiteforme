@@ -33,7 +33,8 @@
                         </div>
                         <div class="article-right">
                             <div class="article-title">
-                                <a href="${base+"/showBlog/articleContent/"+item.id}" target="_blank"><#if (item.title?length>50)>${item.title?substring(0,25)}<#else>${item.title}</#if></a>
+                                <a href="${base+"/showBlog/articleContent/"+item.id}"
+                                   target="_blank"><#if (item.title?length>50)>${item.title?substring(0,25)}<#else>${item.title}</#if></a>
                             </div>
                             <div class="article-abstract">
                                 ${item.marks}
@@ -41,11 +42,14 @@
                         </div>
                         <div class="clear"></div>
                         <div class="article-footer">
-                            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${item.publistTime?string("yyyy-MM-dd")}</span>
-                            <span class="article-author"><i class="fa fa-user"></i>&nbsp;&nbsp;<#if (sysuser(item.createId).nickName??)>${sysuser(item.createId).nickName}<#else>${sysuser(item.createId).loginName}</#if></span>
-                            <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a href="${base+"/showBlog"+item.blogChannel.href}">${item.blogChannel.name}</a></span>
+                            <span><i class="fa fa-clock-o"></i>&nbsp;&nbsp;${item.createDate?string("yyyy-MM-dd")}</span>
+                            <span class="article-author"><i
+                                        class="fa fa-user"></i>&nbsp;&nbsp;<#if (sysuser(item.createId).nickName??)>${sysuser(item.createId).nickName}<#else>${sysuser(item.createId).loginName}</#if></span>
+                            <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a
+                                        href="${base+"/showBlog"+item.blogChannel.href}">${item.blogChannel.name}</a></span>
                             <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;${clickNumber(item.id)}</span>
-                            <span class="article-viewinfo"><i class="fa fa-commenting"></i>&nbsp;${item.commentCount}</span>
+                            <span class="article-viewinfo"><i
+                                        class="fa fa-commenting"></i>&nbsp;${item.commentCount}</span>
                         </div>
                     </div>
                     </#list>

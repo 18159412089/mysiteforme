@@ -12,10 +12,12 @@
             <a class="blog-logo" href="${base}/showBlog/index">${site.name}</a>
             <!-- 导航菜单 -->
             <ul class="layui-nav" lay-filter="nav">
-                <@mychannel limit="5">
+                <@mychannel limit="2">
                     <#list result as item>
-                        <li class="layui-nav-item <#if (channel.href?contains(item.href))> layui-this</#if>" >
-                            <a href="${base}/showBlog${item.href}"><i class="layui-icon" style="font-size: 18px;">${item.logo}</i>&nbsp;${item.name}</a>
+                        <li class="layui-nav-item <#if (channel.href?contains(item.href))> layui-this</#if>">
+                            <a href="${base}/showBlog${item.href}"><i class="layui-icon"
+                                                                      style="font-size: 18px;">${item.logo}</i>&nbsp;${item.name}
+                            </a>
                         </li>
                     </#list>
                 </@mychannel>
