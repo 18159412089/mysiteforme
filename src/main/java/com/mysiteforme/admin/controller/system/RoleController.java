@@ -9,6 +9,7 @@ import com.mysiteforme.admin.base.BaseController;
 import com.mysiteforme.admin.entity.Menu;
 import com.mysiteforme.admin.entity.Role;
 import com.mysiteforme.admin.entity.User;
+import com.mysiteforme.admin.realm.AuthRealm;
 import com.mysiteforme.admin.util.LayerData;
 import com.mysiteforme.admin.util.RestResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -139,6 +140,9 @@ public class RoleController extends BaseController {
     @ResponseBody
     @SysLog("保存编辑角色数据")
     public RestResponse edit(@RequestBody Role role) {
+        if (getCurrentUser().getId() != 1 && role.getId() == 2) {
+            return RestResponse.failure("没有权限操作！请联系管理员");
+        }
         if (role.getId() == null || role.getId() == 0) {
             return RestResponse.failure("角色ID不能为空");
         }
@@ -160,6 +164,9 @@ public class RoleController extends BaseController {
     @ResponseBody
     @SysLog("删除角色数据")
     public RestResponse delete(@RequestParam(value = "id", required = false) Long id) {
+        if (getCurrentUser().getId() != 1 && id == 2) {
+            return RestResponse.failure("没有权限操作！请联系管理员");
+        }
         if (id == null || id == 0) {
             return RestResponse.failure("角色ID不能为空");
         }
@@ -177,6 +184,9 @@ public class RoleController extends BaseController {
             return RestResponse.failure("请选择需要删除的角色");
         }
         for (Role r : roles) {
+            if (getCurrentUser().getId() != 1 && r.getId() == 2) {
+                return RestResponse.failure("没有权限操作！请联系管理员！");
+            }
             roleService.deleteRole(r);
         }
         return RestResponse.success();
