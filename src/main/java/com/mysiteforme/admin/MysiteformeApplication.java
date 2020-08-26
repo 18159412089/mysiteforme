@@ -25,10 +25,10 @@ public class MysiteformeApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication.run(MysiteformeApplication.class, args);
-        log.info("启动成功：" + "http://" + InetAddress.getLocalHost().getHostAddress() + ":8080/");
+//        log.info("启动成功：" + "http://" + InetAddress.getLocalHost().getHostAddress() + ":8080/");
     }
 
-    @Component
+   /* @Component
     public class RunHomePage implements CommandLineRunner {
         //启动成功后自动弹出页面
         public void run(String... args) {
@@ -38,5 +38,5 @@ public class MysiteformeApplication extends SpringBootServletInitializer {
                 ex.printStackTrace();
             }
         }
-    }
+    }*/
 }
