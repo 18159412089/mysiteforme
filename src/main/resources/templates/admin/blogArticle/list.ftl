@@ -340,25 +340,25 @@
         var active={
             addBlogArticle : function(){
                 var c = zTreeObj.getSelectedNodes(),url="${base}/admin/blogArticle/add";
-                if(c.length>0){
-                    if(c[0].id != null && c[0].id !== ""){
-                        url = url+"?channelId="+c[0].id;
+                if (c.length > 0) {
+                    if (c[0].id != null && c[0].id !== "") {
+                        url = url + "?channelId=" + c[0].id;
                     }
                 }
                 var addIndex = layer.open({
-                    title : "添加文章内容",
-                    type : 2,
-                    content : url,
-                    success : function(layero, addIndex){
-                        setTimeout(function(){
-                            layer.tips('点击此处返回文章内容列表', '.layui-layer-setwin .layui-layer-close', {
-                                tips: 3
-                            });
-                        },500);
+                    title: "添加文章内容",
+                    type: 2,
+                    content: url,
+                    success: function (layero, addIndex) {
+                        // setTimeout(function(){
+                        //     layer.tips('点击此处返回文章内容列表', '.layui-layer-setwin .layui-layer-close', {
+                        //         tips: 3
+                        //     });
+                        // },500);
                     }
                 });
                 //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
-                $(window).resize(function(){
+                $(window).resize(function () {
                     layer.full(addIndex);
                 });
                 layer.full(addIndex);
