@@ -143,6 +143,11 @@ public class LoginController extends BaseController {
 
     @GetMapping("main")
     public String main(Model model) {
+        setUserMenu(model);
+        return "main";
+    }
+
+    private void setUserMenu(Model model) {
         Map map = userService.selectUserMenuCount();
         User user = userService.findUserById(MySysUser.id());
         Set<Menu> menus = user.getMenus();
@@ -160,7 +165,6 @@ public class LoginController extends BaseController {
         }
         showMenus.sort(new MenuComparator());
         model.addAttribute("userMenu", showMenus);
-        return "main";
     }
 
     /**

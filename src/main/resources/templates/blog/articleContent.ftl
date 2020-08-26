@@ -87,10 +87,12 @@
         <a class="blog-logo" href="${base}/showBlog/index">${site.name}</a>
         <!-- 导航菜单 -->
         <ul class="layui-nav" lay-filter="nav">
-                <@mychannel limit="5">
+                <@mychannel limit="2">
                     <#list result as item>
-                        <li class="layui-nav-item <#if (item.href?contains('wzzl'))> layui-this</#if>" >
-                            <a href="${base}/showBlog${item.href}"><i class="layui-icon" style="font-size: 18px;">${item.logo}</i>&nbsp;${item.name}</a>
+                        <li class="layui-nav-item <#if (item.href?contains('wzzl'))> layui-this</#if>">
+                            <a href="${base}/showBlog${item.href}"><i class="layui-icon"
+                                                                      style="font-size: 18px;">${item.logo}</i>&nbsp;${item.name}
+                            </a>
                         </li>
                     </#list>
                 </@mychannel>
@@ -279,10 +281,10 @@
             layer     = layui.layer;
 
         $(function(){
-            $.post("${base}/showBlog/click",{articleId:${article.id}},function (res) {
-               if(!res.success){
-                   returnlayer.msg(res.message, {icon: 2});
-               }
+            $.post("${base}/showBlog/click",{articleId:${article.id}}, function (res) {
+                if (!res.success) {
+                    return layer.msg(res.message, {icon: 2});
+                }
             });
         });
         <#if (article.blogChannel != null && article.blogChannel.canComment == true)>

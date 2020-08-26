@@ -161,6 +161,7 @@ public class BlogPageController extends BaseController {
     @PostMapping("getOneArticleContent")
     @ResponseBody
     @CrossOrigin
+    @SysLog("【对外暴露接口】获取上下篇文章")
     public RestResponse getOneArticleContent(Long articleId) {
         if (articleId == null || articleId <= 0) {
             throw new MyException("文章ID不能为空");
