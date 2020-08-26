@@ -29,6 +29,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -149,6 +150,36 @@ public class BlogPageController extends BaseController {
         }
         model.addAttribute("article", article);
         return "blog/articleContent";
+    }
+
+    /**
+     * 根据文章ID获取上下篇文章
+     *
+     * @param articleId
+     * @return
+     */
+    @PostMapping("getOneArticleContent")
+    @ResponseBody
+    @CrossOrigin
+    public RestResponse getOneArticleContent(Long articleId) {
+        if (articleId == null || articleId <= 0) {
+            throw new MyException("文章ID不能为空");
+        }
+        EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
+        wrapper.eq("del_flag", false);
+        wrapper.lt("id", articleId);
+        wrapper.orderBy("id", false);
+        Page<BlogArticle> beforeData = blogArticleService.selectPage(new Page<>(0, 1), wrapper);
+        wrapper = new EntityWrapper<>();
+        wrapper.eq("del_flag", false);
+        wrapper.gt("id", articleId);
+        Page<BlogArticle> afterData = blogArticleService.selectPage(new Page<>(0, 1), wrapper);
+        BlogArticle article = blogArticleService.selectOneDetailById(articleId);
+        HashMap<String, Object> resultMap = Maps.newHashMap();
+        resultMap.put("cur", article);
+        resultMap.put("before", beforeData.getRecords());
+        resultMap.put("after", afterData.getRecords());
+        return RestResponse.success().setData(resultMap);
     }
 
     /**
