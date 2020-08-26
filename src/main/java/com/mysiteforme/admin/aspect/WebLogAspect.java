@@ -121,8 +121,8 @@ public class WebLogAspect {
             sysLog.setUsername(StringUtils.isNotBlank(MySysUser.nickName()) ? MySysUser.nickName() : MySysUser.loginName());
         }
         String retString = JSONObject.toJSONString(ret);
-//        sysLog.setResponse(retString.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : retString);
-        sysLog.setResponse(retString);
+        sysLog.setResponse(retString.length() > 5000 ? JSONObject.toJSONString("请求参数数据过长不与显示") : retString);
+//        sysLog.setResponse(retString);
         sysLog.setUseTime(System.currentTimeMillis() - startTime.get());
         sysLog.insert();
     }
