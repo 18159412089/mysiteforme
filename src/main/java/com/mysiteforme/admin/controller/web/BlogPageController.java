@@ -505,6 +505,7 @@ public class BlogPageController extends BaseController {
     @PostMapping("informationList")
     @ResponseBody
     @CrossOrigin
+    @SysLog("对外开放接口  【咨讯文章查询分页】")
     public LayerData<BlogArticle> list(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
                                        @RequestParam(value = "limit", defaultValue = "10", required = false) Integer limit,
                                        ServletRequest request, HttpServletResponse response) {
@@ -563,6 +564,7 @@ public class BlogPageController extends BaseController {
     @PostMapping("informationListNoPage")
     @ResponseBody
     @CrossOrigin
+    @SysLog("对外开放接口  【咨讯文章查询无分页】")
     public RestResponse informationListNoPage(ServletRequest request) {
         EntityWrapper<BlogArticle> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag", false);
@@ -581,6 +583,7 @@ public class BlogPageController extends BaseController {
     @PostMapping("getCaseTypeList")
     @ResponseBody
     @CrossOrigin
+    @SysLog("对外开放接口  【案例类型】")
     public RestResponse getCaseTypeList(@RequestParam(value = "id", required = false, defaultValue = "22") long id) {
         EntityWrapper<BlogChannel> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag", false);
